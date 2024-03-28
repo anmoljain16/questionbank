@@ -3,12 +3,12 @@
 import {useState} from "react";
 import {getQuestions} from "@/utils/GeminiAi";
 import Question from "@/components/Question";
+import QuestionsSlider from "@/components/QuestionsSlider";
 
 export default function SearchTopic(){
     const[topic,setTopic]= useState("")
     const [questions,setQuestions] = useState([])
     const [loading,setLoading] = useState(false)
-
     const handleSubmit = (e) =>{
         e.preventDefault()
         // console.log(topic)
@@ -17,13 +17,15 @@ export default function SearchTopic(){
         getQuestions(topic,"topic").then((res)=>{
             console.log(res)
             setQuestions(res)
-            setTopic("")
+            setTopic( "")
+
         }).catch((err)=>{
             console.log(err)
         }).finally(()=>{
             setLoading(false)
 
         })
+
     }
 
     return(
@@ -44,6 +46,7 @@ export default function SearchTopic(){
                             </svg>
                         </div>
                         <input type="text" id="voice-search" onChange={(e) => setTopic(e.target.value)}
+                                 value={topic}
                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="Search Mockups, Logos, Design Templates..." required/>
                         <button type="button" className="absolute inset-y-0 end-0 flex items-center pe-3">
@@ -87,7 +90,7 @@ export default function SearchTopic(){
                     }
 
                 </form>
-                {questions.length > 0 && <Question ques={questions}/>}
+                {questions.length > 0 && <QuestionsSlider ques={questions} topic={topic}/>}
 
             </div>
 
