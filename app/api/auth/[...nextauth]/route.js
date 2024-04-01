@@ -2,7 +2,9 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import {connect} from "@/dbConnection/dbConnect";
-import User from "@/modals/userModal";
+import User from "@/models/userModal";
+
+
 
 export const authOptions = {
     // Configure one or more authentication providers
@@ -18,7 +20,7 @@ export const authOptions = {
         // ...add more providers here
     ],
     callbacks:{
-        async jwt({token, user}) {
+        async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
                 token.username = user.username;
@@ -26,14 +28,18 @@ export const authOptions = {
                 token.image = user.image;
                 token.name = user.name;
             }
+            console.log("Token: ",token)
             return token;
         },
 
         async session({session, token}) {
-            console.log("Token: ",token)
-            // console.log("Session: ",session)
-            // console.log("Token: ",token)
-            return session
+
+            // session.user.id = token.id;
+            // session.user.username = token.username;
+            // return session;
+            session.user = token;
+            return session;
+
         },
         async signIn({user, account, profile}) {
 

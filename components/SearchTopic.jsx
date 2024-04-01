@@ -9,6 +9,7 @@ export default function SearchTopic(){
     const[topic,setTopic]= useState("")
     const [questions,setQuestions] = useState([])
     const [loading,setLoading] = useState(false)
+
     const handleSubmit = (e) =>{
         e.preventDefault()
         // console.log(topic)
@@ -32,7 +33,7 @@ export default function SearchTopic(){
         <>
 
             <div
-                className="absolute inset-x-0 top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-none px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 lg:px-10 lg:py-5 xl:px-12 xl:py-6"
+                className=" inset-x-0 top-0 z-10 bg-white dark:bg-transparent  shadow-sm dark:shadow-none px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 lg:px-10 lg:py-5 xl:px-12 xl:py-6"
 
             >
                 <form className="flex items-center max-w-lg mx-auto">

@@ -4,7 +4,6 @@ import {useState} from "react";
 export default function QuestionsSlider(props) {
     // console.log(ques)
     const ques = props.ques;
-    console.log(props.topic)
 
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -41,10 +40,10 @@ export default function QuestionsSlider(props) {
     };
 
     return (
-        <div className="container mx-auto text-white">
+        <div className="container mx-auto ">
             {!showResults && (
                 <div className="my-8">
-                    <h2 className="text-2xl font-semibold">{props.topic}</h2>
+                    {/*<h2 className="text-2xl font-semibold">{props.topic}</h2>*/}
                     <h3 className="text-xl font-semibold">{ques[currentQuestion].question}</h3>
                     <ul className="mt-4">
                         {ques[currentQuestion].options.map((option, i) => (

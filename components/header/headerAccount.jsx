@@ -2,11 +2,16 @@
 
 import {useState} from "react";
 import {signOut,useSession,signIn} from "next-auth/react";
+import {getSession} from "next-auth/react";
 import Image from "next/image";
 
 export default function HeaderAccount() {
     const [toggleOptions, setToggleOptions] = useState(false)
     const {data:session} = useSession();
+    // console.log(session)
+
+// const sessionData = getSession();
+//     console.log(sessionData)
     // console.log(session?.user?.image)
     return (
         <div className="block">
