@@ -1,7 +1,9 @@
 "use client"
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 export default function QuizForm({closeCreateQuizModal}) {
+    const router = useRouter()
     const [formData, setFormData] = useState({
         subject: "" || "Biology",
         topic: "",
@@ -31,16 +33,33 @@ export default function QuizForm({closeCreateQuizModal}) {
         if(!formData.difficulty || formData.difficulty.trim() === ""){
             formData.difficulty = "Medium"
         }
-        const response = await fetch("/api/ai/quiz/createquiz", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-        const responseData = await response.json();
+        try{
+            const response = await fetch("/api/ai/quiz/createquiz", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+            const responseData = await response.json();
 
-        console.log(responseData)
+            console.log(responseData)
+            if(responseData.error){
+                console.log(responseData.error)
+                setError(responseData.error)
+                setLoading(false)
+                return;
+            }
+
+            router.push(`/quiz/${responseData.quiz}`)
+        }catch (e) {
+            console.log(e)
+            setError("Error in creating quiz. Please try again.")
+            setLoading(false)
+            return;
+        }
+
+
 
         // console.log(formData)
 
@@ -179,11 +198,17 @@ export default function QuizForm({closeCreateQuizModal}) {
                                         </svg>
                                         Cancel
                                     </button>
-                                    <button
-                                        disabled={loading}
-                                        onClick={createQuiz}
-                                        className="bg-orange-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Create
-                                    </button>
+                                    {loading ? (
+
+                                        <button
+                                            disabled={true}
+                                            className="bg-orange-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Loading..
+                                        </button>):(
+                                        <button
+                                            onClick={createQuiz}
+                                            className="bg-orange-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Create
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

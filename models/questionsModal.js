@@ -10,7 +10,14 @@ const questionsModal = mongoose.Schema({
         required: true,
     },
     questions: {
-        type:[String],
+        type: [
+            {
+                question: String,
+                options: [String],
+                correct: String,
+                explanation: String
+            }
+        ],
         required: true,
     },
     questionsCount:{

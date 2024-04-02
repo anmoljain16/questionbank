@@ -21,23 +21,32 @@ export const authOptions = {
     ],
     callbacks:{
         async jwt({ token, user }) {
-            if (user) {
-                token.id = user.id;
-                token.username = user.username;
-                token.isAdmin = user.isAdmin;
-                token.image = user.image;
-                token.name = user.name;
-            }
-            console.log("Token: ",token)
-            return token;
+            // if (user) {
+            //     token.id = user.id;
+            //     token.username = user.username;
+            //     token.isAdmin = user.isAdmin;
+            //     token.image = user.image;
+            //     token.name = user.name;
+            // }
+            // console.log("Token: ",token)
+            // return token;
+            return {...token, ...user}
         },
 
-        async session({session, token}) {
+        async session({session, token, user}) {
+            // console.log("Token: ",token)
+            session.user.token = token;
+            // if (user){
+            //     session.user.mongoId = user.id;
+            //     console.log("Session: ",session)
+            //     console.log("UserSession: ", user)
+            // }
+            // session.user.gender="Male";
 
             // session.user.id = token.id;
             // session.user.username = token.username;
             // return session;
-            session.user = token;
+            // session.user = token;
             return session;
 
         },
@@ -61,7 +70,7 @@ export const authOptions = {
                 user.username=userExists.username;
                 user.isAdmin=userExists.isAdmin;
                 user.image=userExists.avatar;
-                user.name=userExists.name;
+                user.name=userExists._id;
 
                 return user;
 

@@ -4,7 +4,7 @@ import {useState} from "react";
 export default function QuestionsSlider(props) {
     // console.log(ques)
     const ques = props.ques;
-
+    // console.log(ques)
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [userAnswers, setUserAnswers] = useState(Array(ques.length).fill(null));

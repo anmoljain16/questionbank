@@ -65,7 +65,7 @@ export async function getQuestions(...args) {
     const text = response.text();
     // console.log(`Generated text: ${text}`);
     const jsonData = extractJSON(text);
-
+    // console.log(`Extracted JSON: ${jsonData}`)
     if (jsonData !== null) {
         return jsonData;
     } else {
