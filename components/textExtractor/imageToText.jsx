@@ -2,7 +2,7 @@
 
 import { useState} from 'react';
 import Tesseract from 'tesseract.js';
-import "@/components/textExtractor/ImageToText.css"
+import "@/components/textExtractor/imageToText.css"
 import {getQuestions} from "@/utils/GeminiAi";
 
 export default function ImageToText() {
