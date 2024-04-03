@@ -7,12 +7,14 @@ import NavBar from "@/components/header/header";
 // import {signIn,signOut} from "next-auth/react";
 import QuizForm from "@/components/GenerateQuiz/QuizForm";
 import SearchBar from "@/components/Search/SearchBar";
+import Tab from "@/components/header/tab";
 export default function App(){
 
   return(
       <>
-          <NavBar/>
-          <SearchBar/>
+      <Tab/>
+          {/* <NavBar/> */}
+          {/* <SearchBar/> */}
           {/*<QuizForm/>*/}
           {/*<button onClick={() => signIn()}>Sign in</button>*/}
           {/*<button onClick={() => signOut()}>Sign out</button>*/}
