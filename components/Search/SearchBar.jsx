@@ -3,7 +3,7 @@
 import React from 'react';
 import QuizForm from "@/components/GenerateQuiz/QuizForm";
 
-const SearchBar = () => {
+const SearchBar = ({closeSearchModal}) => {
     const [search, setSearch] = React.useState('');
     const [searchResults, setSearchResults] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
@@ -20,11 +20,12 @@ const SearchBar = () => {
     }
 
     return (
-        <div className="fixed flex flex-col inset-0 z-50 flex items-center justify-center  bg-transparent ">
+        <div className="fixed flex flex-col inset-0 z-50 flex items-center justify-center  bg-gray-100  ">
             <div className=" flex flex-col gap-4 p-4 rounded-lg max-h-[500px] mb-10 overflow-x-auto">
                 <div className="flex items-center justify-between w-full p-2 rounded-full bg-white shadow-lg">
                     <div className="flex items-center">
-                        <div className="p-2 mr-1 rounded-full hover:bg-gray-100 cursor-pointer">
+                        <div className="p-2 mr-1 rounded-full hover:bg-gray-100 cursor-pointer"
+                        onClick={closeSearchModal}>
                             <svg className="h-6 w-6 text-gray-500" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 20 20" fill="currentColor">
                                 <path
@@ -112,7 +113,7 @@ const SearchBar = () => {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
                     onClick={openCreateQuizModal}
                 >
-                    Create Quiz
+                    Create New Quiz
                 </button>
             </div>
             {createQuizModal && <QuizForm closeCreateQuizModal={closeCreateQuizModal}/>}

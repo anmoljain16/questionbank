@@ -1,8 +1,11 @@
+import Link from 'next/link'
+import QuizButton from "@/components/GenerateQuiz/QuizButton"
+import SearchButton from '@/components/Search/SearchButton'
 export default function Tab() {
     return (
         <div
-            className="mt-4 max-[768px]:hidden flex items-center  -mx-4 overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap dark:text-gray-800 ">
-            <a rel="noopener noreferrer" href="#"
+            className="mt-4 flex items-center  -mx-4 overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap dark:text-gray-800 ">
+            <Link rel="noopener noreferrer" href={'/'}
                className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b transition duration-1000 ease-in-out focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                      stroke="currentColor" className="w-5 h-5">
@@ -12,8 +15,8 @@ export default function Tab() {
 
 
                 <span>Home</span>
-            </a>
-            <a rel="noopener noreferrer" href="#"
+            </Link>
+            <Link rel="noopener noreferrer" href={'/quiz'}
                className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border dark:border-gray-600 dark:text-gray-900">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -21,7 +24,10 @@ export default function Tab() {
                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                 </svg>
                 <span>Quizzes</span>
-            </a>
+            </Link>
+            
+            <SearchButton/>
+            <QuizButton/>
             <a rel="noopener noreferrer" href="#"
                className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}

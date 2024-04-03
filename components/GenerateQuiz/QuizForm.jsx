@@ -128,6 +128,9 @@ export default function QuizForm({closeCreateQuizModal}) {
                                             <option value="Political Science">Political Science</option>
                                             <option value="Law">Law</option>
                                             <option value="Programming">Programming</option>
+                                            <option value="Cricket">Cricket</option>
+                                            
+
                                             {/* Add more options as needed */}
                                         </select>
                                     </div>
