@@ -4,7 +4,7 @@ import SearchButton from '@/components/Search/SearchButton'
 export default function Tab() {
     return (
         <div
-            className="mt-4 flex items-center  -mx-4 overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap dark:text-gray-800 ">
+            className="mt-4 flex items-center -mx-4 overflow-x-auto overflow-y-visible sm:justify-center flex-nowrap dark:text-gray-800 ">
             <Link rel="noopener noreferrer" href={'/'}
                className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b transition duration-1000 ease-in-out focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
@@ -25,10 +25,10 @@ export default function Tab() {
                 </svg>
                 <span>Quizzes</span>
             </Link>
-            
+
             <SearchButton/>
             <QuizButton/>
-            <a rel="noopener noreferrer" href="#"
+            <Link rel="noopener noreferrer" href={`/profile`}
                className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                      stroke="currentColor" className="w-5 h-5">
@@ -37,7 +37,7 @@ export default function Tab() {
                 </svg>
 
                 <span>Profile</span>
-            </a>
+            </Link>
             {/*<a rel="noopener noreferrer" href="#"*/}
             {/*   className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b dark:border-gray-600 dark:text-gray-600">*/}
             {/*    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"*/}

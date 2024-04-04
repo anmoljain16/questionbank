@@ -8,11 +8,13 @@ import NavBar from "@/components/header/header";
 import QuizForm from "@/components/GenerateQuiz/QuizForm";
 import SearchBar from "@/components/Search/SearchBar";
 import Tab from "@/components/header/tab";
+import QuizPage from "@/components/Quiz/QuizPage";
 export default function App(){
 
   return(
       <>
       <Tab/>
+          <QuizPage/>
           {/* <NavBar/> */}
           {/* <SearchBar/> */}
           {/*<QuizForm/>*/}

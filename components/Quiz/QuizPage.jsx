@@ -1,8 +1,32 @@
 "use client"
 import {useState} from "react";
 
-export default function QuestionsSlider(props) {
-    const ques = props.ques;
+export default function QuizPage(props) {
+    // const ques = props.ques;
+    const ques = [
+        {
+            "question": "Which of the following is NOT a type of AI?",
+            "options": [
+                "Narrow AI",
+                "General AI",
+                "Super AI",
+                "Natural AI"
+            ],
+            "correct": "Natural AI",
+            "explanation": "Natural AI is not a recognized type of AI."
+        },
+        {
+            "question": "What is the term used to describe AI systems that can learn from data without being explicitly programmed?",
+            "options": [
+                "Machine learning",
+                "Deep learning",
+                "Neural networks",
+                "Natural language processing"
+            ],
+            "correct": "Machine learning",
+            "explanation": "Machine learning is a subfield of AI that allows systems to learn from data without being explicitly programmed."
+        },
+        ]
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [userAnswers, setUserAnswers] = useState(Array(ques.length).fill(null));
@@ -62,6 +86,7 @@ export default function QuestionsSlider(props) {
                             ))}
                         </ul>
                     </div>
+
                 )}
                 {showResults && (
                     <div className="my-8">
@@ -97,48 +122,24 @@ export default function QuestionsSlider(props) {
                     </div>
                 )}
             </div>
-            <main className="grid min-h-screen w-full place-items-center bg-gray-300">
-                {/* show question*/}
-
-                <div className="grid min-w-full grid-rows-4 gap-2 rounded-xl bg-gray-200 p-2">
-                    <h1 className="text-center text-2xl font-bold">Who was known as the Maharana of Mewar during the
-                        Battle of Haldighati?
-                    </h1>
-                    <div>
-                        <input type="radio" name="option" id="1" value="1" className="peer hidden" defaultChecked/>
-                        <label htmlFor="1"
-                               className="block mt-4 mb-4 cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Udai
-                            Singh II
-                        </label>
-                    </div>
-
-                    <div>
-                        <input type="radio" name="option" id="2" value="2" className="peer hidden"/>
-                        <label htmlFor="2"
-                               className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">2</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" name="option" id="3" value="3" className="peer hidden"/>
-                        <label htmlFor="3"
-                               className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">3</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" name="option" id="4" value="4" className="peer hidden"/>
-                        <label htmlFor="4"
-                               className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">4</label>
-                    </div>
+            <div className="max-w-md mx-auto p-8 bg-gray-100 rounded-lg shadow-md">
+                <h2 className="text-2xl font-bold mb-4">{ques[currentQuestion].question}</h2>
+                <div className="grid grid-cols-1 gap-4">
+                    {ques[currentQuestion].options.map((option, index) => (
+                        <button
+                            key={index}
+                            className={`bg-gradient-to-r from-blue-600 via-blue-300 to-blue-100 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ${
+                                "option" === option
+                                    ? 'ring-2 ring-offset-2 ring-blue-500'
+                                    : ''
+                            }`}
+                            onClick={() => handleOptionSelect(option)}
+                        >
+                            {option}
+                        </button>
+                    ))}
                 </div>
-                <div className="text-center my-8">
-                    <button
-                        className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={handleNextQuestion}
-                    >
-                        Next
-                    </button>
-                </div>
-            </main>
+            </div>
         </>
     );
 }

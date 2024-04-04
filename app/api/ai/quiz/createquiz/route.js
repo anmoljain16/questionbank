@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {getQuestions} from "@/app/api/ai/quiz/createquiz/gemini";
 import {connect} from "@/dbConnection/dbConnect";
 import Quizzes from "@/models/questionsModal";
 
 export async function handler(req) {
-    let res = NextResponse.next()
-
-    const session = await getServerSession({ req, res,authOptions});
-
-    // console.log(session)
-    const sessionData = (session && session.user) ? session.user : null;
-    // const user = (sessionData.name ?? "Anonymous");
     const data = await req.json();
-    // console.log(user)
+
+
+    const session = await getServerSession({req});
+    const sessionData = (session && session.user) ? session.user : null;
+    let userId=null;
+    if(sessionData){
+        userId = sessionData.name;
+    }
+
 
     let questions = null;
     try{
@@ -45,13 +45,13 @@ export async function handler(req) {
             subject: data.subject,
             topic: data.topic,
             questions: questions,
-            createdBy: sessionData.name ? sessionData.name : null, // Assuming user._id represents the ObjectId of the user
-            isAnonymous: !sessionData.name, // Set isAnonymous to true if user.name is not available
+            createdBy: userId ? userId : null, // Assuming user._id represents the ObjectId of the user
+            isAnonymous: !userId, // Set isAnonymous to true if user.name is not available
             difficulty: data.difficulty,
             questionsCount: parseInt(data.questionsCount) || 10,
         };
 
-        if (!sessionData.name) {
+        if (!userId) {
             delete quizData.createdBy;
         }
 
@@ -65,7 +65,7 @@ export async function handler(req) {
             subject: data.subject,
             topic: data.topic,
             questions: questions,
-            createdBy: user.name || "Anonymous",
+            createdBy: userId || "Anonymous",
             difficulty: data.difficulty,
             questionsCount: parseInt(data.questionsCount) || 10,
             error: "Error in saving questions. Please try again."
