@@ -25,14 +25,12 @@ export async function POST(req, res) {
           $or: [
               { subject: regexPattern },
               { topic: regexPattern },
-              { difficulty: regexPattern },
-
+              { difficulty: regexPattern }
           ]
         }).select('subject topic difficulty createdBy _id')
         return Response.json({
             success: true,
             data: quiz,
-
             message: "Search results",
             error: null
         })
