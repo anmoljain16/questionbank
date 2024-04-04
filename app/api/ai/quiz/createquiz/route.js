@@ -8,12 +8,25 @@ export async function handler(req) {
     const data = await req.json();
 
 
-    const session = await getServerSession({req});
-    const sessionData = (session && session.user) ? session.user : null;
+
     let userId=null;
-    if(sessionData){
-        userId = sessionData.name;
+
+    try{
+        const session = await getServerSession({req});
+        const sessionData = (session && session.user) ? session.user : null;
+        if(sessionData){
+            userId = sessionData.name;
+        }
+    }catch (e) {
+        console.log(e)
+        return NextResponse.json({
+            data: null,
+            error: "Error in getting user data. Please try again."
+        });
     }
+
+
+
 
 
     let questions = null;
