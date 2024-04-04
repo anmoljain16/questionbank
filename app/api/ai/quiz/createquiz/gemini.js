@@ -4,7 +4,7 @@ import {GoogleGenerativeAI} from "@google/generative-ai";
 // Access your API key as an environment variable (see "Set up your API key" above)
 // const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-// console.log(process.env.GEMINI_API_KEY??"No API Key found")
+console.log(process.env.GEMINI_API_KEY??"No API Key found")
 export async function getQuestions(...args) {
     // console.log(args[0])
     // subject: 'Biology',
