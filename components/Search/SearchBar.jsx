@@ -63,7 +63,7 @@ const SearchBar = ({closeSearchModal}) => {
     }
 
     return (<>
-        <div className="fixed flex flex-col inset-0 z-50 flex items-center justify-center  bg-gray-100  ">
+        <div className="fixed flex flex-col inset-0 z-50  items-center justify-center  bg-gray-100  ">
             <div className=" flex flex-col gap-4 p-4 rounded-lg max-h-[500px] mb-10 overflow-x-auto">
                 <div className="flex items-center justify-between w-full p-2 rounded-full bg-white shadow-lg">
                     <div className="flex items-center">
@@ -106,8 +106,8 @@ const SearchBar = ({closeSearchModal}) => {
                             <Link href={`/quiz/${quiz._id}`}>
                                 <div
                                     className="flex items-center justify-between w-full p-2 lg:rounded-full md:rounded-full hover:bg-gray-100 cursor-pointer border-2 rounded-lg">
-                                    <div className="lg:flex md:flex items-center">
-                                        <div className="h-12 w-12 mb-2 lg:mb-0 border md:mb-0 rounded-full mr-3"></div>
+                                    <div className="lg:flex mt-3 mb-3 ml-3 md:flex items-center">
+                                        {/*<div className="h-12 w-12 mb-2 lg:mb-0 border md:mb-0 rounded-full mr-3"></div>*/}
                                         <div className="flex flex-row ">
                                             <div
                                                 className="text-sm mr-3 leading-3  text-gray-700 font-bold w-full">{quiz.topic}

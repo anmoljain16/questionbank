@@ -2,6 +2,7 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
 import QuestionsSlider from "@/components/QuestionsSlider";
+import QuizPage from "@/components/Quiz/QuizPage";
 
 export default function AttemptQuiz({params}) {
 
@@ -11,7 +12,9 @@ export default function AttemptQuiz({params}) {
 
     async function getQuiz() {
         const res = await axios.get(`/api/quiz/getquiz/${params.id}`);
+        // console.log(res.data);
         return res.data;
+
     }
 
 
@@ -24,7 +27,9 @@ export default function AttemptQuiz({params}) {
 
     return (
         <div>
-            {data && <QuestionsSlider ques={data.questions} />}
+            {/*{data && <QuestionsSlider ques={data.questions} topic={data.topic}  />}*/}
+            {!data && <p>Loading...</p>}
+            {data && <QuizPage ques={data.questions} topic={data.topic} />}
         </div>
 
 

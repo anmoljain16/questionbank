@@ -129,7 +129,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                             <option value="Law">Law</option>
                                             <option value="Programming">Programming</option>
                                             <option value="Cricket">Cricket</option>
-                                            
+
 
                                             {/* Add more options as needed */}
                                         </select>
@@ -193,6 +193,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                 </div>
                                 <div className="pt-4 flex items-center space-x-4">
                                     <button
+                                        onClick={closeCreateQuizModal}
                                         className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none">
                                         <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor"
                                              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

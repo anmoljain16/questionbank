@@ -1,8 +1,9 @@
 import {connect} from "@/dbConnection/dbConnect";
 import Quizzes from "@/models/questionsModal";
 
-export async function handler(req) {
-
+export async function handler(request) {
+    const newHeaders = new Headers(request.headers);
+    newHeaders.set('Cache-Control', 'no-cache');
     try{
         await connect();
         const quizzes = await Quizzes.find().select("-questions");
