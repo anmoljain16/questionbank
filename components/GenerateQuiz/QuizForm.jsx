@@ -1,6 +1,7 @@
 "use client"
 import {useState} from "react";
 import {useRouter} from "next/navigation";
+import axios from "axios";
 
 export default function QuizForm({closeCreateQuizModal}) {
     const router = useRouter()
@@ -34,14 +35,14 @@ export default function QuizForm({closeCreateQuizModal}) {
             formData.difficulty = "Medium"
         }
         try{
-            const response = await fetch("/api/ai/quiz/createquiz", {
-                method: "POST",
+            const response = await axios.post("/api/ai/quiz/createquiz", formData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData),
+                timeout: 30000 // Timeout in milliseconds
             });
-            const responseData = await response.json();
+
+            const responseData = response.data;
 
             console.log(responseData)
             if(responseData.error){
@@ -52,10 +53,15 @@ export default function QuizForm({closeCreateQuizModal}) {
             }
 
             router.push(`/quiz/${responseData.quiz}`)
-        }catch (e) {
-            console.log(e)
-            setError("Error in creating quiz. Please try again.")
-            setLoading(false)
+        }catch (error) {
+            if (axios.isCancel(error)) {
+                console.log('Request timed out');
+                setError("Request timed out. Please try again.");
+            } else {
+                console.log(error);
+                setError("Error in creating quiz. Please try again.");
+            }
+            setLoading(false);
             return;
         }
 

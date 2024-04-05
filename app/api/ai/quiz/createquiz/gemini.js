@@ -14,10 +14,10 @@ Generate a variety of questions across different difficulty levels (${difficulty
 Format:
 [
     {
-        "question": "",
-        "options": ["", "", "", ""],
-        "correct": "",
-        "explanation": ""
+        "question": "String",
+        "options": ["String", "String", "String", "String"],
+        "correct": "String",
+        "explanation": "String"
     }
 ]
 `;
