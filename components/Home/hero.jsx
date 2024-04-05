@@ -9,7 +9,7 @@ export default function Hero(){
                         <span>around your product?</span>
                     </h1>
                     <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
-                        Start gaining the traction you've always wanted with our next-level templates and designs. Crafted to help you tell your story.
+                        Start gaining the traction you have always wanted with our next-level templates and designs. Crafted to help you tell your story.
                     </p>
                     <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
                         <a href="#_" className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0">
