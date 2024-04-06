@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import {getQuestions} from "@/app/api/ai/quiz/createquiz/gemini";
+import Alert from "@/components/Alerts/Alert";
 
 export default function QuizForm({closeCreateQuizModal}) {
     const router = useRouter()
@@ -13,18 +14,19 @@ export default function QuizForm({closeCreateQuizModal}) {
         difficulty: "",
         detail: "" ,
     });
-
     const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(null)
     const [error, setError] = useState(null)
 
 
     const createQuiz = async () => {
         setLoading(true)
-        // console.log(formData)
 
-        // API call to create quiz
         if (!formData.topic || formData.topic.trim() === "") {
             setError("Please enter a topic")
+            setTimeout(()=>{
+                setError(null)
+            },3000)
             setLoading(false)
             return;
         }
@@ -37,14 +39,18 @@ export default function QuizForm({closeCreateQuizModal}) {
         }
 
         try{
+            setLoading(true)
 
             const questions = await getQuestions(formData)
-            // console.log(questions)
             if(!questions){
-                setError("Error in generating questions at front end. Please try again.")
+                setError("Error in generating questions. Please try again.")
+                setTimeout(()=>{
+                    setError(null)
+                },3000)
                 setLoading(false)
                 return;
             }
+
             const response = await axios.post("/api/ai/quiz/createquiz", {
                 subject: formData.subject,
                 topic: formData.topic,
@@ -52,58 +58,35 @@ export default function QuizForm({closeCreateQuizModal}) {
                 difficulty: formData.difficulty,
                 detail: formData.detail,
             })
+
             const responseData = response.data;
-            console.log(responseData)
+            // console.log(responseData)
             if(responseData.error){
                 setError(responseData.error)
+                setTimeout(()=>{
+                    setError(null)
+                },3000)
                 setLoading(false)
                 return;
             }
-            router.push(`/quiz/${responseData.quiz}`)
+
+            setSuccess("Quiz created successfully | Redirecting to quiz page..")
+
+            setTimeout(()=>{
+
+                router.push(`/quiz/${responseData.quiz}`)
+            },5000)
+
 
         }catch (error) {
             console.log(error)
             setError("Error in creating quiz. Please try again.")
+            setTimeout(()=>{
+                setError(null)
+            },3000)
             setLoading(false)
             return;
         }
-        // try{
-        //     const response = await axios.post("/api/ai/quiz/createquiz", formData, {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         timeout: 30000 // Timeout in milliseconds
-        //     });
-        //
-        //     const responseData = response.data;
-        //
-        //     console.log(responseData)
-        //     if(responseData.error){
-        //         console.log(responseData.error)
-        //         setError(responseData.error)
-        //         setLoading(false)
-        //         return;
-        //     }
-        //     router.push(`/quiz/${responseData.quiz}`)
-        // }catch (error) {
-        //     if (axios.isCancel(error)) {
-        //         console.log('Request timed out');
-        //         setError("Request timed out. Please try again.");
-        //     } else {
-        //         console.log(error);
-        //         setError("Error in creating quiz. Please try again.");
-        //     }
-        //     setLoading(false);
-        //     return;
-        // }
-        //
-
-
-        // console.log(formData)
-
-
-
-
 
 
         setFormData({
@@ -114,18 +97,24 @@ export default function QuizForm({closeCreateQuizModal}) {
             detail: "",
         })
 
+
+
         setLoading(false)
 
     }
 
     return(
         <>
+
+            {success && <Alert message={success} type={"Success"} />}
+            {error && <Alert message={error} type={"Danger"} />}
             <div
-                className="min-h-screen fixed bg-black inset-0 z-50 overflow-auto bg-opacity-50 py-6 flex flex-col justify-center sm:py-12">
+                className="min-h-screen fixed bg-black inset-0 z-40 overflow-auto bg-opacity-50 py-6 flex flex-col justify-center sm:py-12">
 
                 <div className="relative py-3 sm:max-w-xl transition ease-in-out duration-1000  sm:mx-auto">
 
-                    <div className="relative px-4 py-10  transition ease-in-out duration-1000 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+                    <div
+                        className="relative px-4 py-10  transition ease-in-out duration-1000 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
                         <svg
                             onClick={closeCreateQuizModal}
                             className="w-7 h-5 rtl:rotate-180 font-bold   cursor-pointer transition transform hover:scale-125 duration-300 "
@@ -156,8 +145,8 @@ export default function QuizForm({closeCreateQuizModal}) {
                                             onChange={(e) => setFormData({...formData, subject: e.target.value})}
                                             className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         >
-                                            <option value="Biology" >Biology</option>
-                                            <option value="Maths" >Maths</option>
+                                            <option value="Biology">Biology</option>
+                                            <option value="Maths">Maths</option>
                                             <option value="Chemistry">Chemistry</option>
                                             <option value="Physics">Physics</option>
                                             <option value="History">History</option>
@@ -185,8 +174,8 @@ export default function QuizForm({closeCreateQuizModal}) {
                                             <label className="leading-loose">No. of questions</label>
                                             <div className="relative focus-within:text-gray-600 text-gray-400">
                                                 <input type="text"
-                                                         value={formData.questionsCount}
-                                                         onChange={(e) => setFormData({...formData, questionsCount: 10})}
+                                                       value={formData.questionsCount}
+                                                       onChange={(e) => setFormData({...formData, questionsCount: 10})}
                                                        className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                        placeholder="10 (Default)"
 
@@ -205,8 +194,11 @@ export default function QuizForm({closeCreateQuizModal}) {
                                             <label className="leading-loose">Difficulty</label>
                                             <div className="relative focus-within:text-gray-600 text-gray-400">
                                                 <input type="text"
-                                                         value={formData.difficulty}
-                                                         onChange={(e) => setFormData({...formData, difficulty: e.target.value})}
+                                                       value={formData.difficulty}
+                                                       onChange={(e) => setFormData({
+                                                           ...formData,
+                                                           difficulty: e.target.value
+                                                       })}
                                                        className="pr-4 capitalize pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                        placeholder="default medium"/>
                                                 <div className="absolute left-3 top-2">
@@ -223,8 +215,8 @@ export default function QuizForm({closeCreateQuizModal}) {
                                     <div className="flex flex-col">
                                         <label className="leading-loose">Detail</label>
                                         <input type="text"
-                                                  value={formData.detail}
-                                                  onChange={(e) => setFormData({...formData, detail: e.target.value})}
+                                               value={formData.detail}
+                                               onChange={(e) => setFormData({...formData, detail: e.target.value})}
                                                className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                placeholder="Any specific point you want to cover"/>
                                     </div>
@@ -245,7 +237,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                         <button
                                             disabled={true}
                                             className="bg-orange-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Loading..
-                                        </button>):(
+                                        </button>) : (
                                         <button
                                             onClick={createQuiz}
                                             className="bg-orange-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Create
