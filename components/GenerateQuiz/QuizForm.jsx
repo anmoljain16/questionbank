@@ -51,7 +51,6 @@ export default function QuizForm({closeCreateQuizModal}) {
                 setLoading(false)
                 return;
             }
-
             router.push(`/quiz/${responseData.quiz}`)
         }catch (error) {
             if (axios.isCancel(error)) {
