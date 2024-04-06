@@ -1,6 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI("AIzaSyBqQUtkRBMrenwiSwogcOgMjE8f-Y0-qrM");
+// console.log('API key:', process.env.GEMINI_API_KEY);
 
 export async function getQuestions(...args) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -31,7 +33,7 @@ Format:
 
     const finalPrompt = `${prompt} ${information}`;
 
-    console.log(`Final prompt: ${finalPrompt}`);
+    // console.log(`Final prompt: ${finalPrompt}`);
 
     let response = ""; // Initialize an empty string to store the response
 
@@ -41,21 +43,21 @@ Format:
         // Concatenate each chunk of text into the response
         for await (const chunk of result.stream) {
             const chunkText = chunk.text();
-            console.log(chunkText);
+            // console.log(chunkText);
             response += chunkText;
         }
 
         // Once the stream ends, you can handle further processing if needed
-        console.log("Stream ended");
+        // console.log("Stream ended");
     } catch (e) {
         console.error('Error in generating questions:', e);
         throw new Error('Error in generating questions. Please try again.');
     }
 
-    console.log("Generated response:", response);
+    // console.log("Generated response:", response);
 
     const jsonData = extractJSON(response);
-    console.log("Extracted JSON:", jsonData);
+    // console.log("Extracted JSON:", jsonData);
 
     if (jsonData !== null) {
         return jsonData;

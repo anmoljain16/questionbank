@@ -2,6 +2,7 @@
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
+import {getQuestions} from "@/app/api/ai/quiz/createquiz/gemini";
 
 export default function QuizForm({closeCreateQuizModal}) {
     const router = useRouter()
@@ -34,36 +35,68 @@ export default function QuizForm({closeCreateQuizModal}) {
         if(!formData.difficulty || formData.difficulty.trim() === ""){
             formData.difficulty = "Medium"
         }
+
         try{
-            const response = await axios.post("/api/ai/quiz/createquiz", formData, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                timeout: 30000 // Timeout in milliseconds
-            });
 
+            const questions = await getQuestions(formData)
+            // console.log(questions)
+            if(!questions){
+                setError("Error in generating questions at front end. Please try again.")
+                setLoading(false)
+                return;
+            }
+            const response = await axios.post("/api/ai/quiz/createquiz", {
+                subject: formData.subject,
+                topic: formData.topic,
+                questions: questions,
+                difficulty: formData.difficulty,
+                detail: formData.detail,
+            })
             const responseData = response.data;
-
             console.log(responseData)
             if(responseData.error){
-                console.log(responseData.error)
                 setError(responseData.error)
                 setLoading(false)
                 return;
             }
             router.push(`/quiz/${responseData.quiz}`)
+
         }catch (error) {
-            if (axios.isCancel(error)) {
-                console.log('Request timed out');
-                setError("Request timed out. Please try again.");
-            } else {
-                console.log(error);
-                setError("Error in creating quiz. Please try again.");
-            }
-            setLoading(false);
+            console.log(error)
+            setError("Error in creating quiz. Please try again.")
+            setLoading(false)
             return;
         }
-
+        // try{
+        //     const response = await axios.post("/api/ai/quiz/createquiz", formData, {
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         timeout: 30000 // Timeout in milliseconds
+        //     });
+        //
+        //     const responseData = response.data;
+        //
+        //     console.log(responseData)
+        //     if(responseData.error){
+        //         console.log(responseData.error)
+        //         setError(responseData.error)
+        //         setLoading(false)
+        //         return;
+        //     }
+        //     router.push(`/quiz/${responseData.quiz}`)
+        // }catch (error) {
+        //     if (axios.isCancel(error)) {
+        //         console.log('Request timed out');
+        //         setError("Request timed out. Please try again.");
+        //     } else {
+        //         console.log(error);
+        //         setError("Error in creating quiz. Please try again.");
+        //     }
+        //     setLoading(false);
+        //     return;
+        // }
+        //
 
 
         // console.log(formData)
