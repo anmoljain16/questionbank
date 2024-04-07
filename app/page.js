@@ -1,14 +1,20 @@
-// "use client"
-import ImageToText from "@/components/textExtractor/imageToText"
-import SearchTopic from "@/components/SearchTopic";
-import Question from "@/components/Question";
-import NavBar from "@/components/header/header";
-// import {signIn,signOut} from "next-auth/react";
-import QuizForm from "@/components/GenerateQuiz/QuizForm";
-import SearchBar from "@/components/Search/SearchBar";
 import Tab from "@/components/header/tab";
 import Hero from "@/components/Home/hero";
 import BottomNavigation from "@/components/header/BottomNavigation";
+
+export const metadata = {
+    title: "AQuiz",
+    description: "Explore a world of engaging quizzes on diverse topics! " +
+        "Create, share, and discover captivating quizzes effortlessly with our intuitive platform. " +
+        "Start your A Quiz today!",
+    keywords:["quiz", "quizzes", "AI", "artificial intelligence", "machine learning"] ,
+    url: "https://questionbank.anmoljain.tech/",
+    type: "website",
+    siteName: "AQuiz",
+    creator: "Anmol Jain",
+};
+
+
 export default function App(){
 
   return(
@@ -16,14 +22,7 @@ export default function App(){
       <Tab/>
           <Hero/>
           <BottomNavigation/>
-          {/* <NavBar/> */}
-          {/* <SearchBar/> */}
-          {/*<QuizForm/>*/}
-          {/*<button onClick={() => signIn()}>Sign in</button>*/}
-          {/*<button onClick={() => signOut()}>Sign out</button>*/}
-          {/*<SearchTopic/>*/}
-      {/*<ImageToText/>*/}
-          {/*<Question/>*/}
+
     </>
   )
 }

@@ -13,6 +13,7 @@ module.exports = {
             transform: 'scale(2)',
             opacity: 0,
           },
+
         },
       },
       animation: {

@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 export default function BottomNavigation() {
-    return (<div
+    return (
+        <div
             className="md:hidden sticky bottom-2 p-5 px-6 m-2 flex items-center justify-between bg-gray-900 shadow-3xl text-gray-400 rounded-2xl cursor-pointer">
             <div className="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
