@@ -14,8 +14,7 @@ export default function RootLayout({ children }) {
       <NextAuthProvider>
         {children}
       </NextAuthProvider>
-      <Footer/>
-      <BottomNavigation/>
+
       </body>
 
     </html>

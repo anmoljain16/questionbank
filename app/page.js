@@ -22,8 +22,8 @@ export default function App(){
       <>
       <Tab/>
           <Hero/>
-          {/*<Footer/>*/}
-          {/*<BottomNavigation/>*/}
+          <Footer/>
+          <BottomNavigation/>
 
     </>
   )

@@ -6,7 +6,7 @@ export async function handler(request) {
     newHeaders.set('Cache-Control', 'no-cache');
     try{
         await connect();
-        const quizzes = await Quizzes.find().select("-questions");
+        const quizzes = await Quizzes.find().select("-questions").sort({createdAt: -1}).limit(22);
         return Response.json({
             quizzes: quizzes,
             error: null,
