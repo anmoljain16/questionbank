@@ -1,56 +1,116 @@
+"use client"
+
+import { useEffect, useState } from 'react';
 import Link from "next/link";
 
 export default function BottomNavigation() {
+
+    const [showButton, setShowButton] = useState(true);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+    useEffect(() => {
+        function handleScroll() {
+            const currentScrollPos = window.scrollY;
+            if (currentScrollPos > prevScrollPos) {
+                setShowButton(false); // Scrolling down
+            } else {
+                setShowButton(true); // Scrolling up
+            }
+            setPrevScrollPos(currentScrollPos);
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [prevScrollPos]);
     return (
-        <div
-            className="md:hidden sticky bottom-2 p-5 px-6 m-2 flex items-center justify-between bg-gray-900 shadow-3xl text-gray-400 rounded-2xl cursor-pointer">
-            <Link href={'/'}>
-                <div className="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                         stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
-                    </svg>
+        <>
+            {showButton && (
+                <div
+                    className="md:hidden fixed z-50 w-full h-20 max-w-lg -translate-x-1/2  border border-gray-200 rounded-full bottom-4 left-1/2 bg-white  ">
+                    <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
+                        <Link href={"/"}
+                              className="inline-flex flex-col items-center justify-center px-5 rounded-s-full group">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor" strokeWidth={1.5}
+                                 className="w-6 h-6 mb-1 text-black dark:text-blackgroup-hover:text-green-600 dark:group-hover:text-green-500">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                            </svg>
+                            <span className="sr-only">Home</span>
+                        </Link>
+                        <div id="tooltip-home" role="tooltip"
+                             className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Home
+                            <div className="tooltip-arrow"></div>
+                        </div>
 
+                        <button data-tooltip-target="tooltip-wallet" type="button"
+                                className="inline-flex flex-col items-center justify-center px-5 rounded-s-full group">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                 stroke="currentColor"  className="w-6 h-6 mb-1 text-black dark:text-blackgroup-hover:text-green-600 dark:group-hover:text-green-500">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                            </svg>
+                            <span className="sr-only">Wallet</span>
+                        </button>
+                        <div id="tooltip-wallet" role="tooltip"
+                             className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-1000 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Wallet
+                            <div className="tooltip-arrow"></div>
+                        </div>
+                        <div className="flex items-center justify-center">
+                            <Link href={"/quiz"}
+                                  className="inline-flex items-center justify-center w-14 h-14 font-medium bg-green-600 rounded-full hover:bg-green-700 group focus:ring-1 focus:ring-green-400 focus:outline-none dark:focus:ring-green-500">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor"
+                                     strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                     className="w-6 h-6 text-white">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span className="sr-only">New item</span>
+                            </Link>
+                        </div>
+                        <div id="tooltip-new" role="tooltip"
+                             className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Create new item
+                            <div className="tooltip-arrow"></div>
+                        </div>
+                        <button data-tooltip-target="tooltip-newitem" type="button"
+                                className="inline-flex flex-col items-center justify-center px-5 rounded-s-full group">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                 stroke="currentColor"  className="w-7 h-7 mb-1 text-black dark:text-blackgroup-hover:text-green-600 dark:group-hover:text-green-500">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                            </svg>
+
+                            <span className="sr-only">Settings</span>
+                        </button>
+                        <div id="tooltip-newitem" role="tooltip"
+                             className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Settings
+                            <div className="tooltip-arrow"></div>
+                        </div>
+                        <button data-tooltip-target="tooltip-profile" type="button"
+                                className="inline-flex flex-col items-center justify-center px-5 rounded-s-full group">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                 stroke="currentColor" className="w-6 h-6 mb-1 text-black dark:text-blackgroup-hover:text-green-600 dark:group-hover:text-green-500">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
+                            </svg>
+
+                            <span className="sr-only">Profile</span>
+                        </button>
+                        <div id="tooltip-profile" role="tooltip"
+                             className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Profile
+                            <div className="tooltip-arrow"></div>
+                        </div>
+                    </div>
                 </div>
-            </Link>
-            <div className="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-            </div>
-            <div className="flex flex-col items-center hover:text-blue-400 ">
-                <Link href={'/quiz'} className="absolute bottom-5 shadow-2xl text-center flex items-center justify-center
-                    rounded-full border-4 text-3xl border-gray-50 hover:border-blue-500 bg-blue-500 w-20 h-20 p-2
-                    text-white transition ease-in duration-300 ">
-
-                    <i className="fas fa-phone-alt">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                             stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>
-                        </svg>
-                    </i>
-                     <span
-                        className=" absolute inline-flex h-full w-full rounded-full  opacity-50"></span>
-
-                </Link>
-            </div>
-            <div className="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                     stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                </svg>
-            </div>
-            <div className="flex flex-col items-center transition ease-in duration-200 hover:text-blue-400 ">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                          d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-            </div>
-        </div>
+            )}
+        </>
     )
 }

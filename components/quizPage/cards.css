@@ -44,12 +44,11 @@
     margin: 0 auto;
     text-align: center;
     position: relative;
-    top: 50px;
+    /*top: 50px;*/
     height: 100%;
     width: 90%;
 }
 
-/* Mini Card */
 .miniCard {
     display: inline-block;
     padding: 5px;

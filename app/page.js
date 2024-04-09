@@ -1,6 +1,5 @@
 import Tab from "@/components/header/tab";
 import Hero from "@/components/Home/hero";
-import BottomNavigation from "@/components/header/BottomNavigation";
 import Footer from "@/components/Footer/Footer";
 
 export const metadata = {
@@ -23,7 +22,7 @@ export default function App(){
       <Tab/>
           <Hero/>
           <Footer/>
-          <BottomNavigation/>
+
 
     </>
   )

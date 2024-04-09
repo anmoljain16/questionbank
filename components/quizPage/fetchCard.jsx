@@ -9,6 +9,7 @@ export default function FetchCard() {
     const [ error, setError ] = useState(null);
 
 
+
     useEffect(() => {
         setLoading(true)
         axios.get("/api/quiz/getquiz").then((res) => {
