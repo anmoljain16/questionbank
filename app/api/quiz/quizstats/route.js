@@ -1,6 +1,8 @@
 import {connect} from "@/dbConnection/dbConnect";
 import Quizzes from "@/models/questionsModal";
-export default async function GetQuizzes(){
+export default async function GetQuizzes(request){
+    const newHeaders = new Headers();
+    newHeaders.set('Cache-Control', 'no-cache');
 
     try{
         await connect();
