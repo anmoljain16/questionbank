@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dashboard from "@/public/assects/images/image_489.png"
 import HomeStats from "@/components/Home/HomeStats";
+import QuizzesCarousal from "@/components/Home/NewQuizzesCarousal";
 export default function Hero() {
     return (
         <section className="pt-24 bg-white">
@@ -61,6 +62,7 @@ export default function Hero() {
                     </div>
                 </div>
                 <HomeStats/>
+                {/*<QuizzesCarousal/>*/}
                 <div className="w-full mx-auto mt-20 text-center md:w-10/12">
                     <div className="relative z-0 w-full mt-8">
                         <div className="relative overflow-hidden shadow-2xl">

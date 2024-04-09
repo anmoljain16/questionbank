@@ -109,15 +109,15 @@ export default function QuizForm({closeCreateQuizModal}) {
             {success && <Alert message={success} type={"Success"} />}
             {error && <Alert message={error} type={"Danger"} />}
             <div
-                className="min-h-screen fixed bg-black inset-0 z-40 overflow-auto bg-opacity-50 py-6 flex flex-col justify-center sm:py-12">
+                className="min-h-screen fixed bg-black inset-0 z-40 overflow-auto backdrop-blur-sm bg-black/30   py-6 flex flex-col justify-center sm:py-12 ">
 
                 <div className="relative py-3 sm:max-w-xl transition ease-in-out duration-1000  sm:mx-auto">
 
                     <div
-                        className="relative px-4 py-10  transition ease-in-out duration-1000 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+                        className="relative px-4 py-10  transition ease-in-out duration-1000 bg-white md:mx-0 shadow rounded-3xl sm:p-10">
                         <svg
                             onClick={closeCreateQuizModal}
-                            className="w-7 h-5 rtl:rotate-180 font-bold   cursor-pointer transition transform hover:scale-125 duration-300 "
+                            className="w-7 h-5 rtl:rotate-180 font-bold mb-2  cursor-pointer transition transform hover:scale-125 duration-300 "
                             xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round"
@@ -126,12 +126,11 @@ export default function QuizForm({closeCreateQuizModal}) {
                         <div className="max-w-md mx-auto">
                             <div className="flex items-center space-x-5">
                                 <div
-                                    className="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">i
+                                    className="h-14 w-14 bg-green-500 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">Q
                                 </div>
                                 <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 className="leading-relaxed">Create an Quiz</h2>
-                                    <p className="text-sm text-gray-500 font-normal leading-relaxed">Lorem ipsum, dolor
-                                        sit amet consectetur adipisicing elit.</p>
+                                    <p className="text-sm text-gray-500 font-normal leading-relaxed"></p>
                                 </div>
                             </div>
                             <div className="divide-y divide-gray-200">

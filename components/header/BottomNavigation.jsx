@@ -2,11 +2,33 @@
 
 import { useEffect, useState } from 'react';
 import Link from "next/link";
+import SearchBar from "@/components/Search/SearchBar";
+import QuizForm from "@/components/GenerateQuiz/QuizForm";
 
 export default function BottomNavigation() {
 
     const [showButton, setShowButton] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [searchModal, setSearchModal] = useState(false);
+
+    const openSearchModal = () => {
+        setSearchModal(true);
+    }
+
+    const closeSearchModal = () => {
+        setSearchModal(false);
+    }
+
+    const [createQuizModal, setCreateQuizModal] = useState(false);
+
+    const openCreateQuizModal = () => {
+        setCreateQuizModal(true);
+    }
+
+    const closeCreateQuizModal = () => {
+        setCreateQuizModal(false);
+    }
+
 
     useEffect(() => {
         function handleScroll() {
@@ -46,16 +68,17 @@ export default function BottomNavigation() {
                             <div className="tooltip-arrow"></div>
                         </div>
 
-                        <button data-tooltip-target="tooltip-wallet" type="button"
+                        <button data-tooltip-target="tooltip-search" type="button"
+                                onClick={openSearchModal}
                                 className="inline-flex flex-col items-center justify-center px-5 rounded-s-full group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                                  stroke="currentColor"  className="w-6 h-6 mb-1 text-black dark:text-blackgroup-hover:text-green-600 dark:group-hover:text-green-500">
                                 <path strokeLinecap="round" strokeLinejoin="round"
                                       d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                             </svg>
-                            <span className="sr-only">Wallet</span>
+                            <span className="sr-only">Search</span>
                         </button>
-                        <div id="tooltip-wallet" role="tooltip"
+                        <div id="tooltip-search" role="tooltip"
                              className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-1000 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                             Wallet
                             <div className="tooltip-arrow"></div>
@@ -80,13 +103,14 @@ export default function BottomNavigation() {
                             <div className="tooltip-arrow"></div>
                         </div>
                         <button data-tooltip-target="tooltip-newitem" type="button"
+                                onClick={openCreateQuizModal}
                                 className="inline-flex flex-col items-center justify-center px-5 rounded-s-full group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                                  stroke="currentColor"  className="w-7 h-7 mb-1 text-black dark:text-blackgroup-hover:text-green-600 dark:group-hover:text-green-500">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
                             </svg>
 
-                            <span className="sr-only">Settings</span>
+                            <span className="sr-only">New Item</span>
                         </button>
                         <div id="tooltip-newitem" role="tooltip"
                              className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -111,6 +135,9 @@ export default function BottomNavigation() {
                     </div>
                 </div>
             )}
+            {searchModal && <SearchBar closeSearchModal={closeSearchModal}/>}
+            {createQuizModal && <QuizForm closeCreateQuizModal={closeCreateQuizModal}/>}
+
         </>
     )
 }
