@@ -23,6 +23,7 @@ export default function QuizPage(props) {
     };
 
     const handleNextQuestion = () => {
+        props.setMeanings(null);
         if (currentQuestion + 1 < ques.length) {
             setCurrentQuestion(currentQuestion + 1);
             setShowExplanation(false);

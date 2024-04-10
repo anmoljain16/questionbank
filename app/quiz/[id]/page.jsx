@@ -69,11 +69,11 @@ export default function AttemptQuiz({params}) {
             {/*{data && <QuestionsSlider ques={data.questions} topic={data.topic}  />}*/}
             <Tab/>
             {!data && <p>Loading...</p>}
-            {data && <QuizPage ques={data.questions} topic={data.topic} />}
+            {data && <QuizPage ques={data.questions} topic={data.topic} setMeanings={setMeanings} />}
             {(!meanings && data) && (
                 <div className="container">
                     {/*<p className="text-center text-2xl font-semibold max-[769px]:hidden mt-8">Double click on any word to get its meaning</p>*/}
-                    <p className={"text-center text-2xl  max-[769px]:text-xs mt-8"}>Select any word to get its meaning</p>
+                    <p className={"text-center max-[769px]:text-xs text-lg mt-8 font-normal"}>Select any word to get its meaning</p>
                 </div>
 
             )}
