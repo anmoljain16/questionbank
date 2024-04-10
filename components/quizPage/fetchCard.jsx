@@ -8,13 +8,23 @@ export default function FetchCard() {
     const [ loading, setLoading ] = useState(false);
     const [ error, setError ] = useState(null);
 
-
+    useEffect(()=>{
+        if(localStorage.getItem("quizzes")){
+            setQuizzes(JSON.parse(localStorage.getItem("quizzes")))
+        }
+    },[])
 
     useEffect(() => {
         setLoading(true)
         axios.get("/api/quiz/getquiz").then((res) => {
             setQuizzes(res.data.quizzes);
             setLoading(false)
+            if (res.data.error) {
+                setError(res.data.error)
+            }
+            if(res.data.quizzes){
+                localStorage.setItem("quizzes", JSON.stringify(res.data.quizzes));
+            }
         });
         setLoading(false)
     }, []);

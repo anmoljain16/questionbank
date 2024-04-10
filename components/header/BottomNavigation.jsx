@@ -117,7 +117,7 @@ export default function BottomNavigation() {
                             Settings
                             <div className="tooltip-arrow"></div>
                         </div>
-                        <button data-tooltip-target="tooltip-profile" type="button"
+                        <Link href={"/profile"} data-tooltip-target="tooltip-profile" type="button"
                                 className="inline-flex flex-col items-center justify-center px-5 rounded-s-full group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                                  stroke="currentColor" className="w-6 h-6 mb-1 text-black dark:text-blackgroup-hover:text-green-600 dark:group-hover:text-green-500">
@@ -126,7 +126,7 @@ export default function BottomNavigation() {
                             </svg>
 
                             <span className="sr-only">Profile</span>
-                        </button>
+                        </Link>
                         <div id="tooltip-profile" role="tooltip"
                              className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                             Profile

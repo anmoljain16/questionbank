@@ -9,6 +9,8 @@ const nextConfig = {
             'googleusercontent.com',
             'lh3.googleusercontent.com',
             'avatars.githubusercontent.com',
+            'githubusercontent.com',
+            'avatars0.githubusercontent.com'
 
         ],
     },

@@ -4,11 +4,10 @@ import Link from "next/link"
 import {useState, useEffect} from "react"
 import axios from "axios"
 import {signOut,signIn} from "next-auth/react";
+import ProfileComponent from "@/components/Profile/ProfileComponent";
 
 export default function UserCard(){
     const [user, setUser] = useState(null)
-
-
 
     useEffect(()=>{
         // console.log("asjhfkjas");

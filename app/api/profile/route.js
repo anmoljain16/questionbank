@@ -8,26 +8,25 @@ export async function GET(req){
     if(!sessionData){
         return Response.json({
             error:"User not logged in",
-            message:"Please login to access this page"
+            message:"Please login to access this page",
+
         })
     }
-    // console.log(sessionData)
     const userId = sessionData.name;
-    // console.log("route Get profile hit ");
 
     try{
         await connect()
         let user;
-        user = await User.findById(userId)
+        user = await User.findById(userId).select("name avatar")
         if(!user){
             return Response.json({
                 error:"User not found",
-                message:"User not found in database"
+                message:"User not found in database. Please login again."
             })
         }
 
         let quizzes;
-        quizzes = await Quizzes.find({createdBy:userId}).select("_id")
+        quizzes = await Quizzes.find({createdBy:userId}).select("_id topic createdAt").sort("-createdAt");
         if(!quizzes){
             return Response.json({
                 user:user,
@@ -43,11 +42,7 @@ export async function GET(req){
             message:"User found in database"
         })
 
-        // return Response.json({
-        //     user:user,
-        //     error:null,
-        //     message:"User found in database"
-        // })
+
 
     }catch(e){
         return Response.json({
