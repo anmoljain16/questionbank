@@ -1,5 +1,5 @@
 "use client"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import QuizScore from "@/components/Quiz/QuizScore";
 
 export default function QuizPage(props) {
@@ -14,6 +14,7 @@ export default function QuizPage(props) {
     const handleOptionSelect = (option) => {
         const updatedUserAnswers = [...userAnswers];
         updatedUserAnswers[currentQuestion] = option;
+        // console.log(updatedUserAnswers);
         setUserAnswers(updatedUserAnswers);
         setShowExplanation(true);
         if (option === ques[currentQuestion].correct) {
@@ -25,11 +26,12 @@ export default function QuizPage(props) {
         if (currentQuestion + 1 < ques.length) {
             setCurrentQuestion(currentQuestion + 1);
             setShowExplanation(false);
+
         } else {
-            console.log("Quiz completed!");
-            console.log("Score:", score);
-            console.log("User Answers:", userAnswers);
-            console.log(ques)
+            // console.log("Quiz completed!");
+            // console.log("Score:", score);
+            // console.log("User Answers:", userAnswers);
+            // console.log(ques)
             setShowResults(true);
         }
     };
@@ -41,6 +43,7 @@ export default function QuizPage(props) {
         setScore(0);
         setShowResults(false);
     };
+
 
     return (
         <>
@@ -64,7 +67,7 @@ export default function QuizPage(props) {
                                             checked={option === userAnswers[currentQuestion]}
                                             onChange={() => handleOptionSelect(option)}
                                         />
-                                        <span className="ml-2">{option}</span>
+                                        <span className="ml-2" >{option}</span>
                                     </label>
                                 </li>
                             ))}
