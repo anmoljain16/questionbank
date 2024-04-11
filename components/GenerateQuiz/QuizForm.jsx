@@ -157,6 +157,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                             <option value="Cricket">Cricket</option>
                                             <option value="Digital Marketing">Digital Marketing</option>
                                             <option value="Language">Language</option>
+                                            <option value="Indian Tv Channel">Indian Tv Channels</option>
 
 
                                             {/* Add more options as needed */}
