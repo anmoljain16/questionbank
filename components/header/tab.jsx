@@ -2,12 +2,12 @@ import Link from 'next/link'
 import QuizButton from "@/components/GenerateQuiz/QuizButton"
 import SearchButton from '@/components/Search/SearchButton'
 import BottomNavigation from "@/components/header/BottomNavigation";
-import Badge from "@/components/Notifications/Badge";
+// import Badge from "@/components/Notifications/Badge";
 export default function Tab() {
     return (
         <>
 
-            <Badge/>
+            {/*<Badge/>*/}
             <div
                 className="mt-4 max-[768px]:hidden flex items-center  overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap  dark:text-gray-800 ">
                 <Link rel="noopener noreferrer" href={'/'}
