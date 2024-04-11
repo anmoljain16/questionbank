@@ -17,9 +17,7 @@ export default function QuizPage(props) {
         // console.log(updatedUserAnswers);
         setUserAnswers(updatedUserAnswers);
         setShowExplanation(true);
-        if (option === ques[currentQuestion].correct) {
-            setScore(score + 1);
-        }
+
     };
 
     const handleNextQuestion = () => {
@@ -34,6 +32,10 @@ export default function QuizPage(props) {
             // console.log("User Answers:", userAnswers);
             // console.log(ques)
             setShowResults(true);
+        }
+        const correctOption = ques[currentQuestion].correct;
+        if (userAnswers[currentQuestion] === correctOption) {
+            setScore(score + 1);
         }
     };
 
@@ -52,10 +54,12 @@ export default function QuizPage(props) {
                 {!showResults && (
                     <div className="my-8 px-4">
                         {/* Show topic */}
-                        <h1 className="text-2xl font-semibold text-center mb-4">{props.topic}</h1>
+                        <h1 className="text-2xl font-semibold text-center mb-4 ">{props.subject} |
+                            <span className={"font-normal shadow-2xl border-b-2 border-b-gray-500 w-fit border-dashed"}>  {props.topic}</span>
+                        </h1>
                         {/* Question numbering */}
                         <p className="text-lg">Question {currentQuestion + 1} of {ques.length}</p>
-                        <h3 className="text-xl font-semibold mt-4">{ques[currentQuestion].question}</h3>
+                        <h3 className="text-xl font-semibold mt-4 ">{ques[currentQuestion].question}</h3>
                         <ul className="mt-4">
                             {ques[currentQuestion].options.map((option, i) => (
                                 <li key={i} className="my-2">
