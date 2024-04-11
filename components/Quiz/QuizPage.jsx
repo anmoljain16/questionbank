@@ -53,7 +53,7 @@ export default function QuizPage(props) {
             <div className="container">
                 {!showResults && (
                     <div className="my-8 px-4">
-                        {/* Show topic */}
+                        {/* Subject and Topic */}
                         <h1 className="text-2xl font-semibold text-center mb-4 ">{props.subject} |
                             <span className={"font-normal shadow-2xl border-b-2 border-b-gray-500 w-fit border-dashed"}>  {props.topic}</span>
                         </h1>
@@ -88,28 +88,7 @@ export default function QuizPage(props) {
                     </div>
                 )}
                 {showResults && <QuizScore score={score} userAnswers={userAnswers} ques={ques} handleReport={() => console.log("Reported!")} handleReset={handleReset} />}
-                {/*{showResults && (*/}
-                {/*    <div className="my-8 px-4">*/}
-                {/*        <h3 className="text-xl font-semibold">Quiz Completed!</h3>*/}
-                {/*        <p className="mt-4">Your Score: {score} out of {ques.length}</p>*/}
-                {/*        <h3 className="text-xl font-semibold mt-4">Your Answers:</h3>*/}
-                {/*        {ques.map((question, index) => (*/}
-                {/*            <div key={index} className="mt-4">*/}
-                {/*                <p><strong>Question {index + 1}:</strong> {question.question}</p>*/}
-                {/*                <p><strong>Your Answer:</strong> <span*/}
-                {/*                    className={userAnswers[index] === question.correct ? "text-green-300" : "text-red-500"}>{userAnswers[index]}</span>*/}
-                {/*                </p>*/}
-                {/*                {userAnswers[index] !== question.correct &&*/}
-                {/*                    <p><strong>Correct Answer:</strong> {question.correct}</p>}*/}
-                {/*                <p><strong>Explanation:</strong> {question.explanation}</p>*/}
-                {/*            </div>*/}
-                {/*        ))}*/}
-                {/*        <button*/}
-                {/*            className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-8"*/}
-                {/*            onClick={handleReset}>Retry*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-                {/*)}*/}
+
             </div>
 
 

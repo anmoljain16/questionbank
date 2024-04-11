@@ -32,7 +32,7 @@ const SearchBar = ({closeSearchModal}) => {
                     setLoading(false)
                 });
             }
-        }, 800)
+        }, 400)
 
         return () => clearTimeout(delayDebounceFn)
     }, [search]);
