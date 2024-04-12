@@ -1,7 +1,7 @@
 
 function Alert({ message, type }) {
     return (
-        <div className="p-8 space-y-4 fixed block bottom-14 left-5 z-50">
+        <div className="p-8 space-y-4 fixed block md:bottom-14 top-2  md:left-5 z-50">
             <div className="flex shadow-lg rounded-lg transition">
                 <div className={`py-4 px-6 rounded-l-lg flex items-center bg-${type === "Success" ? "green" : type === "Danger" ? "red" : type === "Warning" ? "yellow" : "blue"}-400`}>
                     {type === "Success" && (

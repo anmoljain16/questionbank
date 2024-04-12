@@ -120,7 +120,7 @@ export default function QuizForm({closeCreateQuizModal}) {
             {success && <Alert message={success} type={"Success"} />}
             {error && <Alert message={error} type={"Danger"} />}
             <div
-                className="min-h-screen fixed bg-black inset-0 z-40 overflow-auto md:backdrop-blur-sm bg-black/30   py-6 flex flex-col justify-center sm:py-12 ">
+                className="min-h-screen  [&::-webkit-scrollbar]:hidden  fixed bg-black inset-0 z-40 overflow-auto md:backdrop-blur-sm bg-black/30   py-6 flex flex-col justify-center sm:py-12 ">
 
                 <div className="relative py-3 sm:max-w-xl transition ease-in-out duration-1000  sm:mx-auto">
 
