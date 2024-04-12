@@ -8,7 +8,7 @@ import Alert from "@/components/Alerts/Alert";
 export default function QuizForm({closeCreateQuizModal}) {
     const router = useRouter()
     const [formData, setFormData] = useState({
-        subject: "" || "Biology",
+        subject: "" ,
         topic: "",
         questionsCount: 10,
         difficulty: "",
@@ -22,6 +22,14 @@ export default function QuizForm({closeCreateQuizModal}) {
     const createQuiz = async () => {
         setLoading(true)
 
+        if (!formData.subject || formData.subject.trim() === "") {
+            setError("Please enter a subject")
+            setTimeout(()=>{
+                setError(null)
+            },3000)
+            setLoading(false)
+            return;
+        }
         if (!formData.topic || formData.topic.trim() === "") {
             setError("Please enter a topic")
             setTimeout(()=>{
@@ -30,6 +38,9 @@ export default function QuizForm({closeCreateQuizModal}) {
             setLoading(false)
             return;
         }
+
+
+
         if (!formData.detail || formData.detail.trim() === "") {
             formData.detail = "none"
         }
@@ -52,8 +63,8 @@ export default function QuizForm({closeCreateQuizModal}) {
             }
 
             const response = await axios.post("/api/ai/quiz/createquiz", {
-                subject: formData.subject,
-                topic: formData.topic,
+                subject: (formData.subject).charAt(0).toUpperCase() + (formData.subject).slice(1).toLowerCase(),
+                topic: (formData.topic).charAt(0).toUpperCase() + (formData.topic).slice(1).toLowerCase(),
                 questions: questions,
                 difficulty: formData.difficulty,
                 detail: formData.detail,
@@ -90,7 +101,7 @@ export default function QuizForm({closeCreateQuizModal}) {
 
 
         setFormData({
-            subject: "" || "Biology",
+            subject: "" ,
             topic: "",
             questionsCount: 10,
             difficulty: "" ,
@@ -139,29 +150,11 @@ export default function QuizForm({closeCreateQuizModal}) {
                                     <div className="flex flex-col">
 
                                         <label className="leading-loose">Subject</label>
-                                        <select
-                                            value={formData.subject}
-                                            onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                                            className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        >
-                                            <option value="Biology">Biology</option>
-                                            <option value="Maths">Maths</option>
-                                            <option value="Chemistry">Chemistry</option>
-                                            <option value="Physics">Physics</option>
-                                            <option value="History">History</option>
-                                            <option value="Geography">Geography</option>
-                                            <option value="Economics">Economics</option>
-                                            <option value="Political Science">Political Science</option>
-                                            <option value="Law">Law</option>
-                                            <option value="Programming">Programming</option>
-                                            <option value="Cricket">Cricket</option>
-                                            <option value="Digital Marketing">Digital Marketing</option>
-                                            <option value="Language">Language</option>
-                                            {/*<option value="Indian Tv Channel">Indian Tv Channels</option>*/}
-
-
-                                            {/* Add more options as needed */}
-                                        </select>
+                                        <input type="text"
+                                               value={formData.subject}
+                                               onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                                               className="px-4 py-2 capitalize border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                               placeholder="Subject"/>
                                     </div>
                                     <div className="flex flex-col">
                                         <label className="leading-loose">Topic</label>
@@ -195,21 +188,31 @@ export default function QuizForm({closeCreateQuizModal}) {
                                         <div className="flex flex-col">
                                             <label className="leading-loose">Difficulty</label>
                                             <div className="relative focus-within:text-gray-600 text-gray-400">
-                                                <input type="text"
-                                                       value={formData.difficulty}
-                                                       onChange={(e) => setFormData({
-                                                           ...formData,
-                                                           difficulty: e.target.value
-                                                       })}
-                                                       className="pr-4 capitalize pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                                       placeholder="default medium"/>
+                                                <select
+                                                    value={formData.difficulty }
+                                                    onChange={(e) => setFormData({
+                                                        ...formData,
+                                                        difficulty: e.target.value
+                                                    })}
+
+                                                    className="pr-4 capitalize pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                >
+
+                                                    <option value={"Easy"} >Easy</option>
+                                                    <option value={"Medium"}>Medium</option>
+                                                    <option value={"Hard"}>Hard</option>
+
+
+                                                </select>
                                                 <div className="absolute left-3 top-2">
-                                                    <svg className="w-6 h-6" fill="none" stroke="currentColor"
-                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                         viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                                         className="w-6 h-6">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
-                                                              strokeWidth="2"
-                                                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                              d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"/>
                                                     </svg>
+
+
                                                 </div>
                                             </div>
                                         </div>
