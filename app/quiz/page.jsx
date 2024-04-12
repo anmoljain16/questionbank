@@ -17,6 +17,7 @@ export default function Quiz(){
         <div>
             {/*<NavBar/>*/}
            <Tab/>
+
             <Cards/>
             <Footer/>
         </div>

@@ -54,8 +54,9 @@ export default function QuizPage(props) {
                 {!showResults && (
                     <div className="my-8 px-4">
                         {/* Subject and Topic */}
-                        <h1 className="text-2xl font-semibold text-center mb-4 ">{props.subject} |
-                            <span className={"font-normal shadow-2xl border-b-2 border-b-gray-500 w-fit border-dashed"}>  {props.topic}</span>
+                        {/*{props.subject} |*/}
+                        <h1 className="text-2xl font-semibold text-center mb-4 ">
+                            <span className={"font-normal  w-fit "}>  {props.topic}</span>
                         </h1>
                         {/* Question numbering */}
                         <p className="text-lg">Question {currentQuestion + 1} of {ques.length}</p>
