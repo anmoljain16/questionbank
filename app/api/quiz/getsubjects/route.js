@@ -35,4 +35,3 @@ export async function getSubjects(){
     }
 }
 
-export {getSubjects as GET}
