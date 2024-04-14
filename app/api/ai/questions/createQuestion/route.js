@@ -1,5 +1,4 @@
-import {connect} from "@/dbConnection/dbConnect";
-// import Question from "@/models/Question";
+
 import {getQuestions} from "@/utils/GeminiAi";
 
 

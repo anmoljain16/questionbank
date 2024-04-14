@@ -64,16 +64,16 @@ export default function QuizPage(props) {
                         <ul className="mt-4">
                             {ques[currentQuestion].options.map((option, i) => (
                                 <li key={i} className="my-2">
-                                    <label className="inline-flex items-center">
+                                    <label className="inline-flex items-center cursor-pointer">
                                         <input
                                             type="radio"
-                                            className="form-radio h-4 w-4 text-indigo-600"
+                                            className="form-radio  h-4 w-4 text-indigo-600"
                                             name={`question${currentQuestion}`}
                                             value={option}
                                             checked={option === userAnswers[currentQuestion]}
                                             onChange={() => handleOptionSelect(option)}
                                         />
-                                        <span className="ml-2" >{option}</span>
+                                        <span className="ml-2  " >{option}</span>
                                     </label>
                                 </li>
                             ))}
@@ -88,7 +88,7 @@ export default function QuizPage(props) {
                         </div>
                     </div>
                 )}
-                {showResults && <QuizScore score={score} userAnswers={userAnswers} ques={ques} handleReport={() => console.log("Reported!")} handleReset={handleReset} />}
+                {showResults && <QuizScore id={props.id} score={score} userAnswers={userAnswers} ques={ques} handleReport={() => console.log("Reported!")} handleReset={handleReset} />}
 
             </div>
 

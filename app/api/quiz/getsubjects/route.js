@@ -1,18 +1,15 @@
-import Quizzes from "@/models/questionsModal";
 import {connect} from "@/dbConnection/dbConnect";
-
+import Quiz from "@/modals/quizModal"
 
 export async function getSubjects(){
 
 
     try{
         await connect();
-        // const TotalSubjects = await Quizzes.distinct("subject");
-        // i want to get all subject in ascending order of quiz count
 
 
 
-        const TotalSubjects = await Quizzes.aggregate([
+        const TotalSubjects = await Quiz.aggregate([
             {
                 $group: {
                     _id: "$subject",
@@ -37,3 +34,5 @@ export async function getSubjects(){
 
     }
 }
+
+export {getSubjects as GET}

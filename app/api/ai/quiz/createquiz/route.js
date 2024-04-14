@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import {getServerSession} from "next-auth";
-import {getQuestions} from "@/app/api/ai/quiz/createquiz/gemini";
 import {connect} from "@/dbConnection/dbConnect";
-import Quizzes from "@/models/questionsModal";
+import Question from "@/modals/QuestionModal";
+import Quiz from "@/modals/quizModal";
+
 
 export async function handler(req) {
     const data = await req.json();
@@ -27,49 +28,121 @@ export async function handler(req) {
         });
     }
 
-
-
-
-
-    let Quiz = null;
     try{
-
-        let quizData = {
+        await connect();
+        const questions = await Question.insertMany(data.questions.map((question) => {
+            return {
+                subject: data.subject,
+                topic: data.topic,
+                question: question.question,
+                options: question.options,
+                correct: question.correct,
+                explanation: question.explanation,
+                tags: question.tags,
+                difficulty: data.difficulty,
+                createdBy: userId ? userId : null, // Assuming user._id represents the ObjectId of the user
+                isAnonymous: !userId, // Set isAnonymous to true if user.name is not available
+            };
+        }   ));
+        const questionIds = questions.map((question) => question._id);
+        // console.log(questionIds)
+        const newQuiz = await Quiz.create({
             subject: data.subject,
             topic: data.topic,
-            questions: data.questions,
+            questions: questionIds,
             createdBy: userId ? userId : null, // Assuming user._id represents the ObjectId of the user
             isAnonymous: !userId, // Set isAnonymous to true if user.name is not available
             difficulty: data.difficulty,
             questionsCount: parseInt(data.questionsCount) || 10,
-        };
+        })
 
-        if (!userId) {
-            delete quizData.createdBy;
-        }
+        // console.log(newQuiz)
 
-        await connect();
-        Quiz = await Quizzes.create(quizData);
+        return NextResponse.json({
+            quiz: newQuiz._id,
+            message: "Quiz created successfully.",
+            error: null
+        })
 
 
     }catch (e) {
         console.log(e)
         return NextResponse.json({
-            subject: data.subject,
-            topic: data.topic,
-            questions: data.questions,
-            createdBy: userId || "Anonymous",
-            difficulty: data.difficulty,
-            questionsCount: parseInt(data.questionsCount) || 10,
-            error: "Error in saving questions. Please try again."
+            data: null,
+            error: "Error in generating questions. Please try again."
         });
-    }
 
-    return NextResponse.json({
-        quiz: Quiz._id,
-        message: "Quiz created successfully.",
-        error: null
-    });
+    }
+    //
+    //
+    // let Quiz = null;
+    // let questions = null;
+    // let questionIds = [];
+    // try{
+    //
+    //     let quizData = {
+    //         subject: data.subject,
+    //         topic: data.topic,
+    //         questions: data.questions,
+    //         createdBy: userId ? userId : null, // Assuming user._id represents the ObjectId of the user
+    //         isAnonymous: !userId, // Set isAnonymous to true if user.name is not available
+    //         difficulty: data.difficulty,
+    //         questionsCount: parseInt(data.questionsCount) || 10,
+    //     };
+    //
+    //     if (!userId) {
+    //         delete quizData.createdBy;
+    //     }
+    //
+    //     await connect();
+    //     Quiz = await Quizzes.create(quizData);
+    //     questions = await Question.insertMany(data.questions.map((question) => {
+    //         return {
+    //             subject: data.subject,
+    //             topic: data.topic,
+    //             question: question.question,
+    //             options: question.options,
+    //             correct: question.correct,
+    //             explanation: question.explanation,
+    //             tags: question.tags,
+    //             difficulty: data.difficulty,
+    //             createdBy: userId ? userId : null, // Assuming user._id represents the ObjectId of the user
+    //             isAnonymous: !userId, // Set isAnonymous to true if user.name is not available
+    //         };
+    //     }));
+    //
+    //     questionIds = questions.map((question) => question._id);
+    //
+    //     const newQuiz = await Quiz.create({
+    //         subject: data.subject,
+    //         topic: data.topic,
+    //         questions: questionIds,
+    //         createdBy: userId ? userId : null, // Assuming user._id represents the ObjectId of the user
+    //         isAnonymous: !userId, // Set isAnonymous to true if user.name is not available
+    //         difficulty: data.difficulty,
+    //         questionsCount: parseInt(data.questionsCount) || 10,
+    //     })
+    //
+    //
+    // }catch (e) {
+    //     console.log(e)
+    //     return NextResponse.json({
+    //         subject: data.subject,
+    //         topic: data.topic,
+    //         questions: data.questions,
+    //         createdBy: userId || "Anonymous",
+    //         difficulty: data.difficulty,
+    //         questionsCount: parseInt(data.questionsCount) || 10,
+    //         error: "Error in saving questions. Please try again."
+    //     });
+    // }
+    //
+    // return NextResponse.json({
+    //     quiz: Quiz._id,
+    //     questions: questions.map((question) => question._id),
+    //     message: "Quiz created successfully.",
+    //     error: null
+    // });
 
     // console.log(questions)
 

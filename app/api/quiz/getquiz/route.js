@@ -1,14 +1,14 @@
 import {connect} from "@/dbConnection/dbConnect";
-import Quizzes from "@/models/questionsModal";
+import Quiz from "@/modals/quizModal";
 
 export async function handler(request) {
     const newHeaders = new Headers(request.headers);
     newHeaders.set('Cache-Control', 'no-cache');
     try{
         await connect();
-        const quizzes = await Quizzes.find().select("-questions").sort({createdAt: -1}).limit(22);
+        const quiz = await Quiz.find().select("-questions").sort({createdAt: -1}).limit(22);
         return Response.json({
-            quizzes: quizzes,
+            quizzes: quiz,
             error: null,
             message: "Quizzes fetched successfully",
         });

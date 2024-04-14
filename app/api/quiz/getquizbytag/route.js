@@ -1,14 +1,13 @@
 import {NextResponse} from "next/server";
 import {connect} from "@/dbConnection/dbConnect";
-import Quizzes from "@/models/questionsModal";
-
+import Quiz from "@/modals/quizModal";
 
 export async function POST(req){
     const {tag} = await req.json();
     // console.log(tag)
     try{
         await connect();
-        const quiz = await Quizzes.find({subject:tag}).select("-questions").sort({createdAt: -1})
+        const quiz = await Quiz.find({subject:tag}).select("-questions").sort({createdAt: -1})
         if (!quiz) {
             return NextResponse.json({
                 data: null,

@@ -1,6 +1,6 @@
 import {connect} from "@/dbConnection/dbConnect"
-import User from "@/models/userModal"
-import Quizzes from "@/models/questionsModal";
+import User from "@/modals/userModal"
+import Quiz from "@/modals/quizModal";
 import {getServerSession} from "next-auth";
 export async function GET(req){
     const session = await getServerSession({ req});
@@ -25,9 +25,9 @@ export async function GET(req){
             })
         }
 
-        let quizzes;
-        quizzes = await Quizzes.find({createdBy:userId}).select("_id topic createdAt").sort("-createdAt");
-        if(!quizzes){
+
+        const quiz = await Quiz.find({createdBy:userId}).select("_id topic createdAt").sort("-createdAt");
+        if(!quiz){
             return Response.json({
                 user:user,
                 quizzes:null,
@@ -37,7 +37,7 @@ export async function GET(req){
         }
         return Response.json({
             user:user,
-            quizzes:quizzes,
+            quizzes:quiz,
             error:null,
             message:"User found in database"
         })

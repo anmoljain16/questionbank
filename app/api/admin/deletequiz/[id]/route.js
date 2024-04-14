@@ -1,8 +1,9 @@
 import {getServerSession} from "next-auth";
 import {NextResponse} from "next/server";
-import User from "@/models/userModal";
+import User from "@/modals/userModal";
 import {connect} from "@/dbConnection/dbConnect";
-import Quizzes from "@/models/questionsModal";
+import Quiz from "@/modals/quizModal";
+import DeletedQuiz from "@/modals/DeletedQuizModal";
 export async function DELETE(request, id){
 
     const session = await getServerSession();
@@ -38,15 +39,34 @@ export async function DELETE(request, id){
 
 
 
-    const deletedQuiz = await Quizzes.findByIdAndDelete(id.params.id)
+    const deletedQuiz = await Quiz.findByIdAndDelete(id.params.id)
+    if(!deletedQuiz){
+        return NextResponse.json({
+            error:"Quiz not found",
+            message:"The quiz you are trying to delete does not exist"
+        })
+    }
 
+    const deleted = await DeletedQuiz.create({
+        subject: deletedQuiz.subject,
+        topic: deletedQuiz.topic,
+        questions: deletedQuiz.questions,
+        questionsCount: deletedQuiz.questionsCount,
+        createdBy: deletedQuiz.createdBy,
+        tags: deletedQuiz.tags,
+        difficulty: deletedQuiz.difficulty,
+        isApproved: deletedQuiz.isApproved,
+        approvedBy: deletedQuiz.approvedBy,
+        isAnonymous: deletedQuiz.isAnonymous,
+        deletedBy: user.name,
+    })
 
 
 
     return NextResponse.json({
         AdminName:user.name,
         message: `${deletedQuiz.topic} deleted by Admin - ${(user.name)}`,
-        deletedQuiz
+        deletedQuiz : deleted._id
     })
 
 

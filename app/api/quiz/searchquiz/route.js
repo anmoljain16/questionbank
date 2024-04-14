@@ -1,6 +1,5 @@
 import {connect} from "@/dbConnection/dbConnect";
-import Quizzes from "@/models/questionsModal";
-
+import Quiz from "@/modals/quizModal";
 
 export async function POST(req, res) {
     const data = await req.json();
@@ -21,7 +20,7 @@ export async function POST(req, res) {
 
     try {
         await connect()
-        const quiz = await Quizzes.find({
+        const quiz = await Quiz.find({
           $or: [
               { subject: regexPattern },
               { topic: regexPattern },

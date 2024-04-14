@@ -78,6 +78,7 @@ export default function Hero() {
                             </div>
 
                             <Image
+                                priority={true}
                                 src={dashboard}
                                 alt={"AQuiz Home Page"}
                                 width={"100%"}

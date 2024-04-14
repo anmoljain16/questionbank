@@ -2,8 +2,7 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import {connect} from "@/dbConnection/dbConnect";
-import User from "@/models/userModal";
-
+import User from "@/modals/userModal";
 
 
 export const authOptions = {

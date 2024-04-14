@@ -1,8 +1,7 @@
 import {getServerSession} from "next-auth";
 import {NextResponse} from "next/server";
-import User from "@/models/userModal";
+import User from "@/modals/userModal";
 import {connect} from "@/dbConnection/dbConnect";
-import Quizzes from "@/models/questionsModal";
 export async function DELETE(request){
     const newHeaders = new Headers(request.headers);
     newHeaders.set('Cache-Control', 'no-cache');

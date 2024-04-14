@@ -1,7 +1,24 @@
-import Link from "next/link";
-import Tab from "@/components/header/tab";
+import {useEffect} from "react";
+import axios from "axios";
 
-const QuizScore = ({ score, userAnswers, ques, handleReport, handleReset }) => {
+
+const QuizScore = ({id, score, userAnswers, ques, handleReport, handleReset }) => {
+
+    useEffect(()=>{
+        const updateViewCount = async () => {
+            try{
+                const res = await axios.put("/api/quiz/updatequizview", {id});
+                console.log(res.data);
+                return res.data;
+            }catch (e) {
+                console.log(e);
+            }
+
+        }
+
+        updateViewCount().then(r => console.log(r));
+
+    })
 
     return (
         <>

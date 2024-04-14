@@ -1,12 +1,12 @@
 import {connect} from "@/dbConnection/dbConnect";
-import Quizzes from "@/models/questionsModal";
+import Quiz from "@/modals/quizModal";
 export default async function GetQuizzes(){
 
 
     try{
         await connect();
 
-        const quizStats = await Quizzes.aggregate([
+        const quizStats = await Quiz.aggregate([
             {
                 $group:{
                     _id: null,

@@ -46,7 +46,7 @@ export default function QuizForm({closeCreateQuizModal}) {
         }
 
         if(!formData.difficulty || formData.difficulty.trim() === ""){
-            formData.difficulty = "Medium"
+            formData.difficulty = "Easy"
         }
 
         try{
@@ -140,7 +140,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                     className="h-14 w-14 bg-green-500 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">Q
                                 </div>
                                 <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
-                                    <h2 className="leading-relaxed">Create an Quiz</h2>
+                                    <h2 className="leading-relaxed">Create A Quiz</h2>
                                     <p className="text-sm text-gray-500 font-normal leading-relaxed"></p>
                                 </div>
                             </div>
