@@ -4,74 +4,79 @@ import Question from "@/modals/QuestionModal";
 import Quiz from "@/modals/quizModal";
 import {getQuestions} from "@/app/api/ai/quiz/createquiz/gemini"
 // pages/api/createQuizzes.js
-import axios from 'axios';
+// import axios from 'axios';
 
 export async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
 
-    const data = {
-        subject_name: "Computer Graphics and Visualization",
-        topics: [
-            "Applications of computer Graphics in various fields",
-            "Evolution of computer Graphics",
-            "Graphics Systems",
-            "Introduction to Computer Graphics and OpenGL",
-            "Rasterization and Transformations",
-            "2D viewing pipeline",
-            "3D viewing pipeline",
-            "Visibility and Shading",
-            "Discrete Techniques and Object Representation",
-            "DDA and Bresenham line drawing algorithm",
-            "Mid-point circle generating algorithm",
-            "Clipping algorithms",
-            "Projection Transformations",
-            "Basic Illumination Models",
-            "Bezier and B-spline curves"
-        ]
-    }
-
-    try {
-        const quizPromises = [];
-
-        for (const topic of data.topics) {
-            const formData = {
-                subject: data.subject_name,
-                topic: topic,
-                // Add other formData properties like difficulty, detail if needed
-            }
-
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Delay for 1 second
-
-            const questions = await getQuestions(formData)
-
-            if (!questions) {
-                continue; // Continue to the next topic
-            }
-
-            const response = await axios.post("/api/ai/quiz/createquiz", {
-                subject: formData.subject.charAt(0).toUpperCase() + formData.subject.slice(1).toLowerCase(),
-                topic: formData.topic.charAt(0).toUpperCase() + formData.topic.slice(1).toLowerCase(),
-                questions: questions,
-                // Add other properties like difficulty, detail if needed
-            })
-
-            const responseData = response.data;
-
-            if (responseData.error) {
-                continue; // Continue to the next topic
-            }
-
-            quizPromises.push(responseData.quiz); // Push quiz ID to array
-        }
-
-        res.status(200).json({ quizzes: quizPromises });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+    return NextResponse.json({
+        data: null,
+        error: "Method Not Allowed"
+    })
+    // if (req.method !== 'POST') {
+    //     return res.status(405).json({ error: 'Method Not Allowed' });
+    // }
+    //
+    // const data = {
+    //     subject_name: "Computer Graphics and Visualization",
+    //     topics: [
+    //         "Applications of computer Graphics in various fields",
+    //         "Evolution of computer Graphics",
+    //         "Graphics Systems",
+    //         "Introduction to Computer Graphics and OpenGL",
+    //         "Rasterization and Transformations",
+    //         "2D viewing pipeline",
+    //         "3D viewing pipeline",
+    //         "Visibility and Shading",
+    //         "Discrete Techniques and Object Representation",
+    //         "DDA and Bresenham line drawing algorithm",
+    //         "Mid-point circle generating algorithm",
+    //         "Clipping algorithms",
+    //         "Projection Transformations",
+    //         "Basic Illumination Models",
+    //         "Bezier and B-spline curves"
+    //     ]
+    // }
+    //
+    // try {
+    //     const quizPromises = [];
+    //
+    //     for (const topic of data.topics) {
+    //         const formData = {
+    //             subject: data.subject_name,
+    //             topic: topic,
+    //             // Add other formData properties like difficulty, detail if needed
+    //         }
+    //
+    //         await new Promise(resolve => setTimeout(resolve, 1000)); // Delay for 1 second
+    //
+    //         const questions = await getQuestions(formData)
+    //
+    //         if (!questions) {
+    //             continue; // Continue to the next topic
+    //         }
+    //
+    //         const response = await axios.post("/api/ai/quiz/createquiz", {
+    //             subject: formData.subject.charAt(0).toUpperCase() + formData.subject.slice(1).toLowerCase(),
+    //             topic: formData.topic.charAt(0).toUpperCase() + formData.topic.slice(1).toLowerCase(),
+    //             questions: questions,
+    //             // Add other properties like difficulty, detail if needed
+    //         })
+    //
+    //         const responseData = response.data;
+    //
+    //         if (responseData.error) {
+    //             continue; // Continue to the next topic
+    //         }
+    //
+    //         quizPromises.push(responseData.quiz); // Push quiz ID to array
+    //     }
+    //
+    //     res.status(200).json({ quizzes: quizPromises });
+    //
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).json({ error: 'Internal Server Error' });
+    // }
 }
 
 export { handler as GET };
