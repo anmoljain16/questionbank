@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <GoogleAnalytics gaId="G-GMHXFV1HYH" />
+
 
       <NextAuthProvider>
         <ReduxProvider>
@@ -22,6 +22,8 @@ export default function RootLayout({ children }) {
       </NextAuthProvider>
 
       </body>
+      <GoogleAnalytics gaId="G-GMHXFV1HYH" />
+
 
     </html>
   );
