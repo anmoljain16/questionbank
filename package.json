@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.3.1",
+    "@next/third-parties": "^14.2.1",
     "@reduxjs/toolkit": "^2.2.3",
     "aws4": "^1.12.0",
     "axios": "^1.6.8",
@@ -17,7 +18,7 @@
     "fs": "^0.0.1-security",
     "google-dictionary-api": "^1.0.8",
     "mongoose": "^8.2.3",
-    "next": "14.1.4",
+    "next": "^14.2.1",
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
