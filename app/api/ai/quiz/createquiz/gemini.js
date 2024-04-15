@@ -1,9 +1,9 @@
-"use server"
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 // const genAI = new GoogleGenerativeAI("AIzaSyBqQUtkRBMrenwiSwogcOgMjE8f-Y0-qrM");
-console.log('API key:', process.env.GEMINI_API_KEY);
+console.log('API key:', process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 
 export async function getQuestions(...args) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
