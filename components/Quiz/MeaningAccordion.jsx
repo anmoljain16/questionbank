@@ -11,11 +11,12 @@ export default function MeaningAccordion({meanings}) {
 
 
                 <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">Dictionary </h2>
-                <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">{word} ({phonetic})</p>
-
+                {word &&
+                    <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">{word} ({phonetic})</p>}
+                {!word && <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">The dictionary does not have its meaning</p>}
 
                 <div className="flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 dark:divide-gray-300">
-                    {meaningsList.map((meaning, index) => {
+                    {meaningsList && meaningsList.map((meaning, index) => {
                         return (
 
                             <details key={index}>

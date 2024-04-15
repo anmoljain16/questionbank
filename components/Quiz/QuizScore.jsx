@@ -1,24 +1,40 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
+import Link from "next/link";
 
 
-const QuizScore = ({id, score, userAnswers, ques, handleReport, handleReset }) => {
+const QuizScore = ({id, score, userAnswers, ques, handleReport,subject,topic, handleReset }) => {
 
+    const [relatedQuiz, setRelatedQuiz] = useState(null);
+    const [recentQuiz, setRecentQuiz] = useState(null);
+
+    async function getRelatedQuiz() {
+        const res = await axios.post("/api/quiz/relatedquiz", {subject,topic});
+        // console.log(res.data)
+        return res.data;
+    }
+
+    // console.log(relatedQuiz)
     useEffect(()=>{
-        const updateViewCount = async () => {
-            try{
-                const res = await axios.put("/api/quiz/updatequizview", {id});
-                console.log(res.data);
-                return res.data;
-            }catch (e) {
-                console.log(e);
-            }
+        const delayDebounceFn = setTimeout(() => {
 
-        }
+            getRelatedQuiz().then((res) => {
+                // console.log(res)
+                if(res.data.relatedQuizzes){
+                    setRelatedQuiz(res.data.relatedQuizzes);
+                }
+                if(res.data.recentQuizzes){
+                    setRecentQuiz(res.data.recentQuizzes);
+                }
 
-        updateViewCount().then(r => console.log(r));
+            });
 
-    })
+        }, 500)
+
+        return () => clearTimeout(delayDebounceFn)
+
+
+    },[id])
 
     return (
         <>
@@ -76,79 +92,52 @@ const QuizScore = ({id, score, userAnswers, ques, handleReport, handleReset }) =
                     </div>
                 </div>
             </section>
-            {/*<div className="w-full xl:w-8/12 mb-12 xl:mb-0  mx-auto mt-8 sm:mt-24 ">*/}
-            {/*<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">*/}
-            {/*        <div className="rounded-t mb-0 px-4 py-3 border-b-0">*/}
-            {/*            <div className="flex flex-wrap items-center">*/}
-            {/*                <div className="relative w-full px-4 max-w-full flex-grow flex-1">*/}
-            {/*                    <h3 className="font-semibold text-base text-gray-800 sm:text-lg">Quiz Report</h3>*/}
-            {/*                    <p className="text-sm text-gray-500 mt-1">Your Score: {score}/{ques.length}</p>*/}
-            {/*                </div>*/}
-            {/*                <div*/}
-            {/*                    className="relative w-full px-4 max-w-full flex-grow flex-1 mt-4 sm:mt-0 flex justify-end">*/}
-            {/*                    <button*/}
-            {/*                        className=" bg-rose-500 text-white hover:bg-rose-600 transition duration-300 py-2 px-4 rounded mr-4"*/}
-            {/*                        onClick={handleReset}>Retry*/}
-            {/*                    </button>*/}
-            {/*                    <Link href={"/quiz"}*/}
-            {/*                          className=" bg-green-600 text-white font-light hover:bg-green-700   transition duration-300 py-2 px-4 rounded">*/}
-            {/*                        See All Quizzes*/}
-            {/*                    </Link>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
+            {
+                relatedQuiz && (
+                    <section className="">
+                        <div className="container flex flex-col justify-center p-4 mx-auto mb-14 md:p-8 ">
+                            <h2 className={"text-2xl font-bold leading-none text-center  md:text-3xl"}>Related Quizzes</h2>
+                            <div className="grid grid-cols-1 gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3">
+                                {relatedQuiz.map((quiz, index) => {
+                                    return (
+                                        <Link href={`/quiz/${quiz._id}`} key={index}
 
-            {/*        <div className="block w-full overflow-x-auto">*/}
-            {/*            <table className="items-center bg-transparent w-full border-collapse">*/}
-            {/*                <thead>*/}
-            {/*                <tr>*/}
-            {/*                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs sm:text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">*/}
-            {/*                        Question*/}
-            {/*                    </th>*/}
-            {/*                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs sm:text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">*/}
-            {/*                        Correct Answer*/}
-            {/*                    </th>*/}
-            {/*                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs sm:text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">*/}
-            {/*                        Your Answer*/}
-            {/*                    </th>*/}
-            {/*                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs sm:text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">*/}
-            {/*                        Explanation*/}
-            {/*                    </th>*/}
-            {/*                </tr>*/}
-            {/*                </thead>*/}
+                                              className={" border  border-gray-200 hover:shadow-lg hover:bg-gray-300 hover:scale-105 transition duration-300 p-4 bg-gray-100 shadow-md rounded-md "}>
+                                            <h3 className={"text-xl font-semibold"}>{quiz.topic.charAt(0).toUpperCase()+quiz.topic.slice(1)}</h3>
+                                            <p className={"text-sm font-medium"}>{quiz.subject}</p>
 
-            {/*                <tbody>*/}
-            {/*                {ques.map((question, index) => (*/}
-            {/*                    <tr key={index}*/}
-            {/*                        className={userAnswers[index] === question.correct ? 'bg-green-100' : userAnswers[index] ? 'bg-red-100' : 'bg-amber-100'}>*/}
-            {/*                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs sm:text-sm whitespace-nowrap p-4 text-gray-800">*/}
-            {/*                            {question.question}*/}
-            {/*                        </td>*/}
-            {/*                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs sm:text-sm whitespace-nowrap p-4 text-gray-800">*/}
-            {/*                            {question.correct}*/}
-            {/*                        </td>*/}
-            {/*                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs sm:text-sm whitespace-nowrap p-4 text-gray-800">*/}
-            {/*                            {userAnswers[index] || "Not Attempted"}*/}
-            {/*                        </td>*/}
-            {/*                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs sm:text-sm whitespace-nowrap p-4 text-gray-800">*/}
-            {/*                            {question.explanation}*/}
-            {/*                        </td>*/}
-            {/*                        /!*<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs sm:text-sm whitespace-nowrap p-4">*!/*/}
-            {/*                        /!*    <button*!/*/}
-            {/*                        /!*        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"*!/*/}
-            {/*                        /!*        onClick={() => handleReport(index)}>*!/*/}
-            {/*                        /!*        Report*!/*/}
-            {/*                        /!*    </button>*!/*/}
-            {/*                        /!*</td>*!/*/}
-            {/*                    </tr>*/}
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </section>
 
-            {/*                ))}*/}
-            {/*                </tbody>*/}
-            {/*            </table>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
+                )
+            }
 
-            {/*</div>*/}
+            {
+                recentQuiz && (<section className=""><div className="container flex flex-col justify-center p-4 mx-auto mb-32 md:p-8 ">
+                            <h2 className={"text-2xl font-bold leading-none text-center sm:text-3xl"}>Recent Quizzes</h2>
+                            <div className="grid grid-cols-1 gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3">
+                                {recentQuiz.map((quiz, index) => {
+                                    return (
+                                        <Link href={`/quiz/${quiz._id}`} key={index}
+
+                                              className={" border border-gray-200 hover:shadow-lg hover:bg-gray-200 hover:scale-105 transition duration-300 p-4 bg-white shadow-md rounded-md "}>
+                                            <h3 className={"text-xl font-semibold"}>{quiz.topic.charAt(0).toUpperCase()+quiz.topic.slice(1)}</h3>
+                                            <p className={"text-sm font-medium"}>{quiz.subject}</p>
+
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </section>
+
+                )
+            }
+
 
         </>
     );

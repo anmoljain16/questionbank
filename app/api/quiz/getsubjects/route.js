@@ -19,7 +19,7 @@ export async function getSubjects(){
             {
                 $sort: { quizCount: -1 } // Sort by quizCount in ascending order
             }
-        ]);
+        ]).limit(11);
         return {
             data: TotalSubjects,
             error: null,

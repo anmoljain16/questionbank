@@ -5,6 +5,7 @@ import QuestionsSlider from "@/components/QuestionsSlider";
 import QuizPage from "@/components/Quiz/QuizPage";
 import Tab from "@/components/header/tab";
 import MeaningAccordion from "@/components/Quiz/MeaningAccordion";
+import Link from "next/link";
 
 export default function AttemptQuiz({params}) {
 
@@ -15,7 +16,6 @@ export default function AttemptQuiz({params}) {
 
     async function getQuiz() {
         const res = await axios.get(`/api/quiz/getquiz/${params.id}`);
-        // console.log(res.data);
         return res.data;
 
     }
@@ -40,6 +40,8 @@ export default function AttemptQuiz({params}) {
                     })
                     .catch(error => {
                         // console.error('There was a problem with the fetch operation:', error);
+                        setMeanings({notFound: true});
+                        setTimeout(()=>{setMeanings(null)}, 1500);
                     });
             }
         };
@@ -67,7 +69,8 @@ export default function AttemptQuiz({params}) {
     return (
         <div>
             {/*{data && <QuestionsSlider ques={data.questions} topic={data.topic}  />}*/}
-            <Tab/>
+            {/*<Tab/>*/}
+
             {!data && <p>Loading...</p>}
             {data && <QuizPage ques={data.questions} id={params.id} topic={data.topic} subject={data.subject} setMeanings={setMeanings} />}
             {(!meanings && data) && (
@@ -79,7 +82,7 @@ export default function AttemptQuiz({params}) {
             )}
             {meanings && <MeaningAccordion meanings={meanings} />}
 
-            </div>
+        </div>
 
 
     )

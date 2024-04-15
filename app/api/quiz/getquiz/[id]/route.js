@@ -14,23 +14,22 @@ export async function handler(req, id) {
                 error: "Quiz not found",
             });
         }
-        // get all questions options and explations and correct of the Quiz from QUestion Modal
-        // quiz.questions = quiz.questions.map((question) => mongoose.Types.ObjectId(question));
+
         quiz.views += 1;
         await quiz.save();
         const questionsIds = quiz.questions;
 
         const questions = await Question.find({_id: {
             $in: questionsIds
-        }}).select({options: 1, correct: 1, explanation: 1, question: 1, _id: 1, tags: 1, difficulty: 1}).lean();
+        }}).select({options: 1, correct: 1, explanation: 1, question: 1}).lean();
 
-
-        // console.log({...quiz,questions:questions})
 
 
         return Response.json({
             data:{
-                ...quiz,questions:questions
+                questions:questions,
+                subject: quiz.subject,
+                topic: quiz.topic,
             },
 
             error: null,

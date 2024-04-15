@@ -120,7 +120,7 @@ export default function QuizForm({closeCreateQuizModal}) {
             {success && <Alert message={success} type={"Success"} />}
             {error && <Alert message={error} type={"Danger"} />}
             <div
-                className="min-h-screen  [&::-webkit-scrollbar]:hidden  fixed bg-black inset-0 z-40 overflow-auto md:backdrop-blur-sm bg-black/30   py-6 flex flex-col justify-center sm:py-12 ">
+                className="min-h-screen  [&::-webkit-scrollbar]:hidden  fixed bg-black inset-0 z-50 overflow-auto md:backdrop-blur-sm bg-black/30   py-6 flex flex-col justify-center sm:py-12 ">
 
                 <div className="relative py-3 sm:max-w-xl transition ease-in-out duration-1000  sm:mx-auto">
 
@@ -140,7 +140,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                     className="h-14 w-14 bg-green-500 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">Q
                                 </div>
                                 <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
-                                    <h2 className="leading-relaxed">Create A Quiz</h2>
+                                    <h2 className="leading-relaxed">Create New Quiz</h2>
                                     <p className="text-sm text-gray-500 font-normal leading-relaxed"></p>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                                value={formData.detail}
                                                onChange={(e) => setFormData({...formData, detail: e.target.value})}
                                                className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                               placeholder="Any specific point you want to cover"/>
+                                               placeholder="Any specific point you want to cover most"/>
                                     </div>
                                 </div>
                                 <div className="pt-4 flex items-center space-x-4">

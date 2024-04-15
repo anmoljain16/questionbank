@@ -1,6 +1,7 @@
 "use client"
 import {useEffect, useState} from "react";
 import QuizScore from "@/components/Quiz/QuizScore";
+import Tab from "@/components/header/tab";
 
 export default function QuizPage(props) {
     const ques = props.ques;
@@ -50,6 +51,13 @@ export default function QuizPage(props) {
 
     return (
         <>
+            {!showResults && (<button onClick={() => {
+                confirm("Do you want to end the Quiz?") ? window.location.pathname = "/quiz" : null;
+            }}
+                                          className="absolute ml-4 mt-1 text-red-600 ">Leave
+            </button>)}
+            {showResults && <Tab/>}
+
             <div className="container">
                 {!showResults && (
                     <div className="my-8 px-4">
@@ -73,7 +81,7 @@ export default function QuizPage(props) {
                                             checked={option === userAnswers[currentQuestion]}
                                             onChange={() => handleOptionSelect(option)}
                                         />
-                                        <span className="ml-2  " >{option}</span>
+                                        <span className="ml-2  ">{option}</span>
                                     </label>
                                 </li>
                             ))}
@@ -88,7 +96,9 @@ export default function QuizPage(props) {
                         </div>
                     </div>
                 )}
-                {showResults && <QuizScore id={props.id} score={score} userAnswers={userAnswers} ques={ques} handleReport={() => console.log("Reported!")} handleReset={handleReset} />}
+                {showResults && <QuizScore id={props.id} score={score} userAnswers={userAnswers} ques={ques}
+                                           subject={props.subject} topic={props.topic}
+                                           handleReport={() => console.log("Reported!")} handleReset={handleReset}/>}
 
             </div>
 

@@ -10,6 +10,7 @@ export async function getQuestions(...args) {
 
     const { subject, topic, questionsCount, difficulty, detail } = args[0];
 
+
     const prompt = `Your task is to create multiple-choice questions (MCQs) covering ${topic} in ${subject}. 
 Each question should include options, a correct answer, and an explanation. 
 Generate a variety of questions across different difficulty levels (${difficulty}) to effectively challenge participants.

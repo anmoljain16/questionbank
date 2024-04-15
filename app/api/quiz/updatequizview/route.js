@@ -1,36 +1,27 @@
 
 import {NextResponse} from "next/server";
+import {connect} from "@/dbConnection/dbConnect";
+import Quiz from "@/modals/quizModal"
 
 export async function PUT(req){
     const {id} = await req.json()
     // console.log(id)
-    // await connect();
-    // const quiz = await Quizzes.updateOne({_id:id},{viewsCount:1}).select("-questions");
-    // const quiz = await Quizzes.updateOne({_id:id},{
-    //     $set:{
-    //         viewsCount:1
-    //     }
-    // },{upsert:false}).then((result,err)=>{
-    //     console.log(result,err)
-    // })
-    // const quiz = await Quizzes.findById("661a7794003abd0f99b488b5")
-    // console.log(quiz)
+    await connect();
+    const quiz = await Quiz.findById(id);
 
-    // if(quiz.viewsCount){
-    //     quiz.viewCount += 1;
-    //     console.log(quiz.viewCount)
-    //     await quiz.save();
-    // }
-    // else{
-    //     const newCount=  await Quizzes.aggregate().addFields(
-    //         {
-    //             viewsCount :1
-    //         }
-    //     )
-    //     console.log(newCount)
-    // }
+    if(!quiz){
+        return NextResponse.json({
+            data: null,
+            error: "Quiz not found"
+        })
+    }
+
+    quiz.views += 1;
+    await quiz.save();
+
 
     return NextResponse.json({
+        viewCount: quiz.views,
         data: "Quiz view count updated",
         error: null,
     })
