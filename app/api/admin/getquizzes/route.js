@@ -16,6 +16,7 @@ export async function GET(request){
 
         })
     }
+
     if(!session){
         return NextResponse.json({
             data: null,

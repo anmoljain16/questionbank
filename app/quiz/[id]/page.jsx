@@ -36,6 +36,7 @@ export default function AttemptQuiz({params}) {
                     .then(data => {
                         // console.log(data[0]?.meanings[0]);
                         setMeanings(data[0]);
+                        console.log(data[0]);
 
                     })
                     .catch(error => {
@@ -80,6 +81,7 @@ export default function AttemptQuiz({params}) {
                 </div>
 
             )}
+
             {meanings && <MeaningAccordion meanings={meanings} />}
 
         </div>

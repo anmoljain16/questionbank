@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import dashboard from "@/public/assects/images/image_489.png"
 import HomeStats from "@/components/Home/HomeStats";
-import QuizzesCarousal from "@/components/Home/NewQuizzesCarousal";
 export default function Hero() {
     return (
         <section className="pt-24 bg-white">

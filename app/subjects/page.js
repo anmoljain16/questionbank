@@ -1,12 +1,12 @@
 import Tab from "@/components/header/tab";
-import Cards from "@/components/quizPage/cards";
+import SubjectsList from "@/components/Subjects/SubjectsList";
 
 export default function Subjects(){
 
     return (
         <>
             <Tab/>
-            <Cards/>
+            <SubjectsList/>
         </>
     )
 }

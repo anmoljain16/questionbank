@@ -29,8 +29,7 @@ const quizSchema = new mongoose.Schema({
            type: Number,
     },
     tags: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Tag',
+        type:[String]
     },
     views: {
         type: Number,

@@ -2,6 +2,8 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import Link from "next/link";
+import {getTags} from "@/app/api/ai/quiz/createquiz/getTags";
+import {log} from "next/dist/server/typescript/utils";
 
 export default function Admin(){
     const [quizzes, setQuizzes] = useState([]);
@@ -69,6 +71,35 @@ export default function Admin(){
         }catch(e){
             setError(e.message)
         }
+    }
+
+    const getTag = async (id)=>{
+        let subject = "";
+        let topic = "";
+        let questions = "";
+        try{
+            const res = await axios.get(`/api/quiz/getquiz/${id}`)
+            // console.log(res.data)
+            if(res.data.error){
+                setError(res.data.error)
+                return
+            }
+            subject = res.data.data.subject;
+            topic = res.data.data.topic;
+            questions = JSON.stringify(res.data.data.questions)
+
+        }catch(e){
+            console.log(e)
+        }
+
+        const tags = await getTags({subject, topic, questions})
+
+        console.log(tags)
+
+        const response = await axios.post(`/api/quiz/tags/createtags`, {tags,id})
+        console.log(response.data)
+
+
     }
 
     const approveQuiz = async (id)=> {
@@ -162,6 +193,10 @@ export default function Admin(){
                                         <th className={"px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"}>
                                             Delete
                                         </th>
+                                        <th className={"px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"}>
+                                            Get Tag
+                                        </th>
+
                                     </tr>
                                     </thead>
 
@@ -203,6 +238,22 @@ export default function Admin(){
                                                 </svg>
 
                                                 {/*<button className="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">Delete</button>*/}
+                                            </td>
+                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                     strokeWidth={1.5} stroke="currentColor"
+                                                     className="w-5 h-5 cursor-pointer text-fuchsia-600 hover:scale-110 duration-100"
+                                                     onClick={() => {
+                                                         getTag( quiz._id).then(() => {
+                                                         }).catch(e =>{
+                                                             console.log(e)})
+                                                     }}
+                                                >
+
+                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                          d="M12 4.5v15m7.5-7.5h-15"/>
+                                                </svg>
+
                                             </td>
                                         </tr>
                                     ))}

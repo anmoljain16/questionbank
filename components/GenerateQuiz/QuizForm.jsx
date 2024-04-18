@@ -122,25 +122,18 @@ export default function QuizForm({closeCreateQuizModal}) {
             <div
                 className="min-h-screen  [&::-webkit-scrollbar]:hidden  fixed bg-black inset-0 z-50 overflow-auto md:backdrop-blur-sm bg-black/30   py-6 flex flex-col justify-center sm:py-12 ">
 
-                <div className="relative py-3 sm:max-w-xl transition ease-in-out duration-1000  sm:mx-auto">
+                <div className="relative py-3 transition ease-in-out duration-1000  sm:mx-auto">
 
                     <div
                         className="relative px-4 py-10  transition ease-in-out duration-1000 bg-white md:mx-0 shadow rounded-3xl sm:p-10">
-                        <svg
-                            onClick={closeCreateQuizModal}
-                            className="w-7 h-5 rtl:rotate-180 font-bold mb-2  cursor-pointer transition transform hover:scale-125 duration-300 "
-                            xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"/>
-                        </svg>
+
                         <div className="max-w-md mx-auto">
                             <div className="flex items-center space-x-5">
                                 <div
-                                    className="h-14 w-14 bg-green-500 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">Q
+                                    className=" h-14 w-14  rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono ">
                                 </div>
                                 <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
-                                    <h2 className="leading-relaxed">Create New Quiz</h2>
+                                    <h2 className="leading-relaxed  ">Create New Quiz</h2>
                                     <p className="text-sm text-gray-500 font-normal leading-relaxed"></p>
                                 </div>
                             </div>
@@ -164,14 +157,14 @@ export default function QuizForm({closeCreateQuizModal}) {
                                                className="px-4 py-2 capitalize border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                placeholder="Topic"/>
                                     </div>
-                                    <div className="flex items-center space-x-4">
+                                    <div className="flex md:flex-row flex-col   ">
                                         <div className="flex flex-col">
                                             <label className="leading-loose">No. of questions</label>
                                             <div className="relative focus-within:text-gray-600 text-gray-400">
                                                 <input type="text"
                                                        value={formData.questionsCount}
                                                        onChange={(e) => setFormData({...formData, questionsCount: 10})}
-                                                       className="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                       className=" pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-400"
                                                        placeholder="10 (Default)"
 
                                                 />
@@ -217,14 +210,7 @@ export default function QuizForm({closeCreateQuizModal}) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col">
-                                        <label className="leading-loose">Detail</label>
-                                        <input type="text"
-                                               value={formData.detail}
-                                               onChange={(e) => setFormData({...formData, detail: e.target.value})}
-                                               className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                               placeholder="Any specific point you want to cover most"/>
-                                    </div>
+
                                 </div>
                                 <div className="pt-4 flex items-center space-x-4">
                                     <button

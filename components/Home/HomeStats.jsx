@@ -1,5 +1,4 @@
 import GetQuizzes from "@/app/api/quiz/quizstats/route";
-import NumbersCount from "@/components/Home/NumbersCount";
 
 export default async function HomeStats() {
     let stats = {
@@ -28,7 +27,7 @@ export default async function HomeStats() {
                     </p>
                 </div>
                 <div className="text-center md:border-r">
-                    <h6 className="text-4xl font-bold lg:text-5xl xl:text-6xl">{stats.totalQuestions}+</h6>
+                    <h6 className="text-4xl font-bold lg:text-5xl xl:text-6xl">{(stats.totalQuizzes)*10}+</h6>
                     <p className="text-sm font-medium tracking-widest text-gray-800 uppercase lg:text-base">
                         Questions
                     </p>
