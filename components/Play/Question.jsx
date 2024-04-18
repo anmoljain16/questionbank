@@ -7,7 +7,10 @@ async function getQuestions(){
         const data = res.json()
         return data
     } catch (e) {
-        return {error: true}
+        return {
+            error: true,
+            data: null
+        }
     }
 }
 
@@ -15,7 +18,7 @@ async function getQuestions(){
 export default async function Question(){
 
     const response = await getQuestions()
-
+    console.log(response)
     if (response.error) return <>..... </>
 
     const questions = response.data
