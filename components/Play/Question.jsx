@@ -1,9 +1,14 @@
 import Options from "@/components/Play/Options";
 
 async function getQuestions(){
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
-        {next:{revalidate:30}})
-    return res.json()
+    try {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
+            {next: {revalidate: 30}})
+        const data = res.json()
+        return data
+    } catch (e) {
+        return {error: true}
+    }
 }
 
 
