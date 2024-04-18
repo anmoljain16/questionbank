@@ -1,7 +1,7 @@
 import Options from "@/components/Play/Options";
 
 async function getQuestions(){
-    const res = await fetch('http://localhost:3000/api/play/getquestions',
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
         {next:{revalidate:30}})
     return res.json()
 }
@@ -26,13 +26,8 @@ export default async function Question(){
                               className="px-2 py-1 text-xs md:text-sm rounded dark:bg-green-500 dark:text-gray-50">{question.subject}</span>
                     </div>
                     <div className="mt-3">
-                    <span rel="noopener noreferrer" className="md:text-xl   ">{question.question}
-</span>
-
+                        <span rel="noopener noreferrer" className="md:text-xl">{question.question} </span>
                         <Options options={question.options} id={question._id} correct={question.correct} explanation={question.explanation} />
-
-
-
                     </div>
 
 

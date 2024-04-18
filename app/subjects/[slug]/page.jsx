@@ -2,13 +2,13 @@ import {redirect} from "next/navigation";
 import Tab from "@/components/header/tab";
 
 async function getSubject(slug) {
-    const res = await fetch(`http://localhost:3000/api/quiz/subjects/${slug}`,
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/quiz/subjects/${slug}`,
         {method: 'GET',
             cache: "no-store",
         })
-    const data = await res.json()
+    return await res.json()
 
-    return data
+
 }
 
 export default async function Subject({params}) {

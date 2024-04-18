@@ -1,8 +1,8 @@
 import "./SubjectsList.css";
-import { Link } from 'next-view-transitions'
+import {Link} from 'next-view-transitions'
 
 async function fetchSubjects() {
-    const res = await fetch('http://localhost:3000/api/quiz/subjects',{ cache: "no-store"});
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/quiz/subjects`, {cache: "no-store"});
     return res.json();
 }
 
