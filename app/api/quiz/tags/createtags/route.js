@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
 import {connect} from "@/dbConnection/dbConnect";
-import Tag from "@/modals/TagModal"
-import Quiz from "@/modals/QuizModal"
+import Tag from "@/modals/TagModal";
+import Quiz from "@/modals/quizModal";
 
 export async function POST(req) {
     const {tags,id} = await req.json();
