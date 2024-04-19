@@ -10,16 +10,17 @@ export async function handler(req){
                     $sample: {size: 20}
                 }
             ])
-
-            return Response.json({
-                data: questions,
-                error: false,
-            })
+            return questions
+            // return Response.json({
+            //     data: questions,
+            //     error: false,
+            // })
         }catch (e) {
-            return Response.json({
-                message: e.message,
-                error: true,
-            })
+            // return Response.json({
+            //     message: e.message,
+            //     error: true,
+            // })
+            return e.message
         }
 }
 

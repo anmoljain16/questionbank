@@ -1,11 +1,11 @@
 import Options from "@/components/Play/Options";
+import {handler} from "@/app/api/play/getquestions/route";
 
 async function getQuestions(){
     try {
         const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
             {next: {revalidate: 30}})
-        const data = res.json()
-        return data
+        return res.json()
     } catch (e) {
         return {
             error: true,
@@ -14,14 +14,14 @@ async function getQuestions(){
     }
 }
 
-
 export default async function Question(){
 
-    const response = await getQuestions()
-    // console.log(response)
-    if (response.error) return <>..... </>
-
-    const questions = response.data
+    const data = await handler()
+    // console.log(data)
+    const questions = data
+    // const response = await getQuestions()
+    // if (response.error) return <>..... </>
+    // const questions = response.data
 
     return (
         <main>
@@ -41,7 +41,7 @@ export default async function Question(){
                         </div>
                         <div className="mt-3">
                             <span rel="noopener noreferrer" className="md:text-xl">{question.question} </span>
-                            <Options options={question.options} id={question._id} correct={question.correct}
+                            <Options options={question.options} correct={question.correct}
                                      explanation={question.explanation}/>
                         </div>
 
