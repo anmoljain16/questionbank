@@ -1,4 +1,6 @@
 import Options from "@/components/Play/Options";
+import ScoreStats from "@/components/Play/ScoreStats";
+import GetMoreQuestions from "@/components/Play/GetMoreQuestions";
 
 async function getQuestions() {
     try {
@@ -30,6 +32,26 @@ export default async function Question(){
     return (
         <main>
             <div className=" mt-10">
+                <div
+                    className="container my-4 cursor-default max-w-4xl w-[96%] md:px-10 px-3.5 py-6 mx-auto rounded-lg shadow-sm dark:bg-gray-50">
+                    {/*<span className={"fixed top-0 left-0 text-xs"}>life is unfair</span>*/}
+                    <div className="flex items-center flex-col md:flex-row justify-between">
+                        <h1 className="text-lg font-medium ">Random Questions</h1>
+                        <div
+                            className="flex items-center text-sm  justify-between mt-4">
+                            <ul className={"list-disc"}>
+                                <li className={"text-red-600  "}>- 2 points for every wrong answer</li>
+                                <li className={"text-green-500"}>+ 1 point for every right answer</li>
+                            </ul>
+
+                        </div>
+                        <div className="flex items-center mt-4 md:mt-0">
+                            {/*    currect score*/}
+                            <span className="text-sm dark:text-gray-600">Current Score: <ScoreStats/></span>
+                        </div>
+
+                    </div>
+                </div>
                 {questions && questions.map((question, index) => (
                     <div key={index}
                          className="container my-4 cursor-default max-w-4xl w-[96%] md:px-10 px-3.5 py-6 mx-auto rounded-lg shadow-sm dark:bg-gray-50">
@@ -45,7 +67,7 @@ export default async function Question(){
                         </div>
                         <div className="mt-3">
                             <span rel="noopener noreferrer" className="md:text-xl">{question.question} </span>
-                            <Options options={question.options} correct={question.correct}
+                            <Options options={question.options} id={question._id} correct={question.correct}
                                      explanation={question.explanation}/>
                         </div>
 
@@ -63,6 +85,7 @@ export default async function Question(){
                     </div>
                 ))}
             </div>
+            <GetMoreQuestions/>
         </main>
 
     )

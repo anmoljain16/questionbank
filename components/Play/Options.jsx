@@ -1,13 +1,23 @@
 "use client"
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {addScore} from "@/app/redux/slice";
 
-export default function Options({ options, correct, explanation }) {
+export default function Options({options, id, correct, explanation}) {
+    const dispatch = useDispatch();
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [isAnswered, setIsAnswered] = useState(false); // Track if the question is answered
 
     const handleOptionClick = (option) => {
-        setSelectedOption(option);
-        setIsCorrect(option === correct);
+        if (!isAnswered) { // Check if the question is not already answered
+            setSelectedOption(option);
+            setIsCorrect(option === correct);
+            const scoreChange = option === correct ? 1 : -2;
+            dispatch(addScore(scoreChange));
+            setIsAnswered(true); // Mark the question as answered
+
+        }
     };
 
     return (
@@ -34,7 +44,6 @@ export default function Options({ options, correct, explanation }) {
                     </li>
                 ))}
             </ul>
-            {/* Display explanation if an option is selected */}
             {selectedOption !== null && (
                 <div className="mt-4">
                     <span className="text-sm">{explanation}</span>

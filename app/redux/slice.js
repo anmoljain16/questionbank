@@ -1,23 +1,29 @@
 import {createSlice, nanoid} from "@reduxjs/toolkit";
 
 const initialState = {
-    quizTag : ""
-}
+    quizTag: "",
+    score: localStorage.getItem("score") || 0
+};
 
 const QuizSlice = createSlice({
-    name:"QuizTags",
+    name: "QuizTags",
     initialState,
-    reducers:{
-        addQuizTag:(state, action) => {
-            // console.log(action)
+    reducers: {
+        addQuizTag: (state, action) => {
             state.quizTag = {
                 id: nanoid(),
                 name: action.payload
-            }
+            };
+        },
+        addScore: (state, action) => {
+            state.score += action.payload;
+
+        },
+        resetScore: (state) => {
+            state.score = 0;
         }
     }
-})
+});
 
-export const {addQuizTag} = QuizSlice.actions;
+export const {addQuizTag, addScore, resetScore} = QuizSlice.actions;
 export default QuizSlice.reducer;
-
