@@ -1,14 +1,27 @@
 import "./SubjectsList.css";
 import {Link} from 'next-view-transitions'
+import {redirect} from "next/navigation";
 
 async function fetchSubjects() {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/quiz/subjects`, {cache: "no-store"});
-    return res.json();
+    try {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/quiz/subjects`,
+            {
+                cache: "no-store",
+                method: 'GET'
+            }
+        );
+        return res.json();
+    } catch (e) {
+        return {error: true}
+    }
 }
 
 export default async function SubjectsList() {
     const subjects = await fetchSubjects();
     // console.log(subjects);
+    if (subjects.error) {
+        return redirect('/')
+    }
     return (
         <main>
             <div className="demo">
