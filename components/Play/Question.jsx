@@ -1,18 +1,18 @@
 import Options from "@/components/Play/Options";
 import {handler} from "@/app/api/play/getquestions/route";
 
-async function getQuestions(){
-    try {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
-            {next: {revalidate: 30}})
-        return res.json()
-    } catch (e) {
-        return {
-            error: true,
-            data: null
-        }
-    }
-}
+// async function getQuestions(){
+//     try {
+//         const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
+//             {next: {revalidate: 30}})
+//         return res.json()
+//     } catch (e) {
+//         return {
+//             error: true,
+//             data: null
+//         }
+//     }
+// }
 
 export default async function Question(){
 
