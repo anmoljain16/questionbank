@@ -1,45 +1,15 @@
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 
 function Footer() {
     return (
-        <section className="bg-white">
+        <section className="bg-white mt-32 ">
             <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
-                {/*<nav className="flex flex-wrap justify-center -mx-5 -my-2">*/}
-                {/*    <div className="px-5 py-2">*/}
-                {/*        <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
-                {/*            About*/}
-                {/*        </a>*/}
-                {/*    </div>*/}
-                {/*    <div className="px-5 py-2">*/}
-                {/*        <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
-                {/*            Blog*/}
-                {/*        </a>*/}
-                {/*    </div>*/}
-                {/*    <div className="px-5 py-2">*/}
-                {/*        <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
-                {/*            Team*/}
-                {/*        </a>*/}
-                {/*    </div>*/}
-                {/*    <div className="px-5 py-2">*/}
-                {/*        <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
-                {/*            Pricing*/}
-                {/*        </a>*/}
-                {/*    </div>*/}
-                {/*    <div className="px-5 py-2">*/}
-                {/*        <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
-                {/*            Contact*/}
-                {/*        </a>*/}
-                {/*    </div>*/}
-                {/*    <div className="px-5 py-2">*/}
-                {/*        <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
-                {/*            Terms*/}
-                {/*        </a>*/}
-                {/*    </div>*/}
-                {/*</nav>*/}
+
                 <div className="flex justify-center mt-8 space-x-6">
                     <Link href="https://www.linkedin.com/in/anmol16/" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Linkedin</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" aria-hidden="true" fill="currentColor"
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" aria-hidden="true"
+                             fill="currentColor"
                              viewBox="0 0 16 16">
                             <path
                                 d="M 2.757813 1 C 1.792969 1 1 1.792969 1 2.757813 L 1 12.246094 C 1 13.207031 1.792969 14 2.757813 14 L 12.246094 14 C 13.207031 14 14 13.207031 14 12.246094 L 14 2.757813 C 14 1.792969 13.207031 1 12.246094 1 Z M 2.757813 2 L 12.246094 2 C 12.667969 2 13 2.332031 13 2.757813 L 13 12.246094 C 13 12.667969 12.667969 13 12.246094 13 L 2.757813 13 C 2.332031 13 2 12.667969 2 12.246094 L 2 2.757813 C 2 2.332031 2.332031 2 2.757813 2 Z M 4 3 C 3.449219 3 3 3.449219 3 4 C 3 4.550781 3.449219 5 4 5 C 4.550781 5 5 4.550781 5 4 C 5 3.449219 4.550781 3 4 3 Z M 3 6 L 3 12 L 5 12 L 5 6 Z M 6 6 L 6 12 L 8 12 L 8 9.320313 C 8 8.488281 8.078125 7.742188 9.078125 7.742188 C 10.0625 7.742188 10 8.636719 10 9.375 L 10 12 L 12 12 L 12 9.039063 C 12 7.320313 11.640625 6 9.691406 6 C 8.753906 6 8.28125 6.375 8.023438 6.875 L 8 6.875 L 8 6 Z"></path>
@@ -63,7 +33,9 @@ function Footer() {
                     <Link href="https://github.com/anmoljain16" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">GitHub</span>
                         <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                            <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd"></path>
+                            <path fillRule="evenodd"
+                                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                  clipRule="evenodd"></path>
                         </svg>
                     </Link>
                     {/*<Link href="#" className="text-gray-400 hover:text-gray-500">*/}
@@ -73,6 +45,15 @@ function Footer() {
                     {/*    </svg>*/}
                     {/*</Link>*/}
                 </div>
+                {/*<nav className="flex flex-wrap justify-center -mx-5 -my-2">*/}
+                {/*    <div className="px-5 py-2">*/}
+                {/*        <a href={`https://anmoljain.tech/`} target="_"*/}
+                {/*           className="text-base leading-6 text-gray-500 hover:text-gray-900">*/}
+                {/*            Developer*/}
+                {/*        </a>*/}
+                {/*    </div>*/}
+
+                {/*</nav>*/}
                 <p className="mt-8 text-base leading-6 text-center text-gray-400">
                     © 2024 AQuiz, Inc. All rights reserved.
                 </p>

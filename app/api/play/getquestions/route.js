@@ -3,7 +3,7 @@ import Question from "@/modals/QuestionModal";
 
 export async function handler(request) {
     const newHeaders = new Headers(request.headers);
-    newHeaders.set('Cache-Control', 'no-cache');
+    newHeaders.set('Cache-Control', 'max-age=5');
 
         try{
             await connect();

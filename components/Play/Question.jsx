@@ -5,7 +5,7 @@ async function getQuestions() {
         const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
             {
                 method: 'GET',
-                cache: "no-store",
+                next: {revalidate: 5},
             })
         return res.json()
     } catch (e) {

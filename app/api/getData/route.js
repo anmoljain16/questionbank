@@ -6,9 +6,18 @@
 // import axios from "axios";
 
 export async function handler(req, res) {
+    const num = 121;
+    const resveredNum = num.toString().split('').reverse().join('');
+
+    const isPalindrome = (num) => {
+        return num === resveredNum;
+    }
+
 
     return Response.json({
-        message: 'Hello from the API'
+        number: num,
+        reversedNumber: parseInt(resveredNum),
+        isPalindrome: isPalindrome(num)
     })
     //
     // const data = {
