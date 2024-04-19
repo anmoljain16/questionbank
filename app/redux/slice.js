@@ -2,7 +2,7 @@ import {createSlice, nanoid} from "@reduxjs/toolkit";
 
 const initialState = {
     quizTag: "",
-    score: localStorage.getItem("score") || 0
+    score: 0,
 };
 
 const QuizSlice = createSlice({
@@ -16,6 +16,7 @@ const QuizSlice = createSlice({
             };
         },
         addScore: (state, action) => {
+
             state.score += action.payload;
 
         },

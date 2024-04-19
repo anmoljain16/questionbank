@@ -13,7 +13,9 @@ export default function Options({options, id, correct, explanation}) {
         if (!isAnswered) { // Check if the question is not already answered
             setSelectedOption(option);
             setIsCorrect(option === correct);
+            // const score = parseInt(localStorage.getItem("score"));
             const scoreChange = option === correct ? 1 : -2;
+            // const scoreChange = option === correct ? score + 1 : score - 2;
             dispatch(addScore(scoreChange));
             setIsAnswered(true); // Mark the question as answered
 

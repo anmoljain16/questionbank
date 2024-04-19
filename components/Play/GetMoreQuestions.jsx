@@ -45,24 +45,24 @@ export default function GetMoreQuestions() {
 
     return (
         <div
-            className="container my-4 mb-10 cursor-default max-w-4xl w-[96%] md:px-10 px-3.5 py-6 mx-auto rounded-lg shadow-sm dark:bg-gray-50">
-            <div className="my-3">
-                <span className="md:text-xl">Current Score : <ScoreStats/></span>
+            className="container my-4 mb-24 justify-center flex cursor-default max-w-4xl w-[96%] md:px-10 px-3.5 py-6 mx-auto rounded-lg shadow-sm dark:bg-gray-50">
+            <div className="my-3 ">
+                <span className="md:text-xl text-lg"> Score : <ScoreStats/></span>
             </div>
-            <div className="flex items-center justify-between">
-                <button
-                    onClick={handleClick}
-                    disabled={isDisabled}
-                    className={`px-2 py-1 text-sm md:text-sm rounded ${isDisabled ? 'bg-gray-400 cursor-not-allowed' : 'dark:bg-fuchsia-500 dark:text-gray-50 cursor-pointer'}`}>
-                    {isDisabled ? `More Questions (${countdown})` : 'More Questions'}
-                </button>
-                <span
-                    onClick={() => {
-                        resetScoreHandler()
+            {/*<div className="flex items-center justify-between">*/}
+            {/*    <button*/}
+            {/*        onClick={handleClick}*/}
+            {/*        disabled={isDisabled}*/}
+            {/*        className={`px-2 py-1 text-sm md:text-sm rounded ${isDisabled ? 'bg-gray-400 cursor-not-allowed' : 'dark:bg-fuchsia-500 dark:text-gray-50 cursor-pointer'}`}>*/}
+            {/*        {isDisabled ? `More Questions (${countdown})` : 'More Questions'}*/}
+            {/*    </button>*/}
+            {/*    <span*/}
+            {/*        onClick={() => {*/}
+            {/*            resetScoreHandler()*/}
 
-                    }}
-                    className="px-2 py-1 text-xs md:text-sm rounded dark:bg-red-500 dark:text-gray-50 cursor-pointer">Reset and Get More</span>
-            </div>
+            {/*        }}*/}
+            {/*        className="px-2 py-1 text-xs md:text-sm rounded dark:bg-red-500 dark:text-gray-50 cursor-pointer">Reset and Get More</span>*/}
+            {/*</div>*/}
 
         </div>
     );
