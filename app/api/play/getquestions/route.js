@@ -1,7 +1,10 @@
 import {connect} from "@/dbConnection/dbConnect";
 import Question from "@/modals/QuestionModal";
 
-export async function handler(req){
+export async function handler(request) {
+    const newHeaders = new Headers(request.headers);
+    newHeaders.set('Cache-Control', 'no-cache');
+
         try{
             await connect();
 
