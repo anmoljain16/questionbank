@@ -1,5 +1,6 @@
 import Options from "@/components/Play/Options";
-import {handler} from "@/app/api/play/getquestions/route";
+import {handler} from "@/app/api/play/getquestions/getQuestions";
+
 
 // async function getQuestions(){
 //     try {
