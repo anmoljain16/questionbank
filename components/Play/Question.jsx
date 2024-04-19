@@ -3,7 +3,10 @@ import Options from "@/components/Play/Options";
 async function getQuestions() {
     try {
         const res = await fetch(`${process.env.NEXTAUTH_URL}/api/play/getquestions`,
-            {method: 'GET', cache: "no-store"})
+            {
+                method: 'GET',
+                next: {revalidate: 10},
+            })
         return res.json()
     } catch (e) {
         return {
