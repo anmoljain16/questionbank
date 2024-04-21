@@ -1,9 +1,9 @@
 "use client"
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
 import {useSelector} from "react-redux";
-import {createSlice, nanoid} from "@reduxjs/toolkit";
+
 export default function FetchCard() {
     const [quizzes, setQuizzes] = useState(null);
     const [ loading, setLoading ] = useState(false);
@@ -140,11 +140,11 @@ const fetchQuizzes = async () => {
                         <div key={index}
                              className="miniCard relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
                             <div className="p-6">
-                                <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-                                    {(quiz.subject && quiz.subject.charAt(0).toUpperCase() + quiz.subject.slice(1)).length > 20 ? (quiz.subject && quiz.subject.charAt(0).toUpperCase() + quiz.subject.slice(1)).slice(0, 17) + "..." : (quiz.subject && quiz.subject.charAt(0).toUpperCase() + quiz.subject.slice(1))}
+                                <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug line-clamp-1 tracking-normal text-blue-gray-900">
+                                    {(quiz.subject && quiz.subject.charAt(0).toUpperCase() + quiz.subject.slice(1)).length > 20 ? (quiz.subject && quiz.subject.charAt(0).toUpperCase() + quiz.subject.slice(1)).slice(0, 15) + "..." : (quiz.subject && quiz.subject.charAt(0).toUpperCase() + quiz.subject.slice(1))}
                                 </h5>
-                                <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-                                    {(quiz.topic && quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1)).length > 20 ? (quiz.topic && quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1)).slice(0, 18) + "..." : (quiz.topic && quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1))}
+                                <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal line-clamp-1 text-blue-gray-900">
+                                    {(quiz.topic && quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1)).length > 20 ? (quiz.topic && quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1)).slice(0, 15) + "..." : (quiz.topic && quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1))}
                                 </h5>
                                 <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
                                     <span className="font-semibold">Difficulty:</span> {quiz.difficulty} <br/>

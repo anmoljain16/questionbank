@@ -1,14 +1,14 @@
-import { Link } from 'next-view-transitions'
+import {Link} from 'next-view-transitions'
 import QuizButton from "@/components/GenerateQuiz/QuizButton"
-import SearchButton from '@/components/Search/SearchButton'
 import BottomNavigation from "@/components/header/BottomNavigation";
+
 export default function Tab() {
     return (
         <>
 
             {/*<Badge/>*/}
             <div
-                className="mt-4 max-[768px]:hidden flex items-center  overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap  dark:text-gray-800 ">
+                className="mt-4 max-[767px]:hidden flex items-center  overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap  dark:text-gray-800 ">
                 <Link rel="noopener noreferrer" href={'/'}
                       className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b transition duration-1000 ease-in-out focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}

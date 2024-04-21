@@ -8,7 +8,7 @@ export default function ScoreStats() {
 
     return (
         <>
-            <span className={`${score >= 0 ? " text-green-500" : "text-red-600"}`}>{score}</span>
+            <span className={`${score >= 0 ? " text-green-500" : "text-red-500"} text-base`}>{score}</span>
 
         </>
     )
