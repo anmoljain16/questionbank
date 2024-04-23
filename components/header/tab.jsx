@@ -10,7 +10,7 @@ export default function Tab() {
             <div
                 className="mt-4 max-[767px]:hidden flex items-center  overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap  dark:text-gray-800 ">
                 <Link rel="noopener noreferrer" href={'/'}
-                      className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b transition duration-1000 ease-in-out focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
+                      className="flex items-center hover:scale-105 flex-shrink-0 px-5 py-3 space-x-2 border-b transition duration-100 ease-in-out focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                          stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -21,7 +21,7 @@ export default function Tab() {
                     <span>Home</span>
                 </Link>
                 <Link rel="noopener noreferrer" href={'/quiz'}
-                      className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border dark:border-gray-600 dark:text-gray-900">
+                      className="flex items-center flex-shrink-0 hover:scale-105 duration-100 px-5 py-3 space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border dark:border-gray-600 dark:text-gray-900">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -30,7 +30,7 @@ export default function Tab() {
                     <span>Quizzes</span>
                 </Link>
                 <Link rel="noopener noreferrer" href={'/play'}
-                      className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border dark:border-gray-600 dark:text-gray-900">
+                      className="flex items-center flex-shrink-0 px-5 py-3 hover:scale-105 duration-100  space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border dark:border-gray-600 dark:text-gray-900">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                          stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -42,7 +42,7 @@ export default function Tab() {
                 {/*<SearchButton/>*/}
                 <QuizButton/>
                 <Link rel="noopener noreferrer" href={`/profile`}
-                      className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
+                      className="flex items-center flex-shrink-0 px-5 py-3 hover:scale-105 duration-100  space-x-2 border-b focus:border-b-0 focus:rounded-t-lg focus:border  dark:border-gray-600 dark:text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                          stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round"

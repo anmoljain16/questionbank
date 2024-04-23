@@ -1,6 +1,7 @@
 import Options from "@/components/Play/Options";
 import ScoreStats from "@/components/Play/ScoreStats";
 import GetMoreQuestions from "@/components/Play/GetMoreQuestions";
+import Link from "next/link";
 
 async function getQuestions() {
     try {
@@ -79,7 +80,17 @@ export default async function Question(){
                         <span rel="noopener noreferrer" href="#" className="flex items-center">
                             {/*<img src="https://source.unsplash.com/50x50/?portrait" alt="avatar"*/}
                             {/*     className="object-cover w-10 h-10 mx-4 rounded-full dark:bg-gray-500"/>*/}
-                            <span className="text-xs dark:text-gray-600"></span>
+                            <span className="text-xs dark:text-gray-600">
+                                <Link href={`/questions/${question._id}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         strokeWidth={1.5} stroke="currentColor"
+                                         className="w-5 h-5 text-gray-950 hover:scale-105 cursor-pointer">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+                                </svg>
+                                </Link>
+
+                            </span>
                         </span>
                             </div>
                         </div>

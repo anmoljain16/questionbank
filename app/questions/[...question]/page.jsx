@@ -1,5 +1,7 @@
 import {redirect} from "next/navigation";
 import Tab from "@/components/header/tab";
+import {Link} from "next-view-transitions";
+import Like from "@/components/Question/Like";
 
 async function getQuestion(id) {
     try {
@@ -24,7 +26,7 @@ export async function generateMetadata({params}) {
     const metaData = question.question
 
     return {
-        title: `${metaData.subject} | ${metaData.topic} - AQuiz`,
+        title: `${metaData.topic} | ${metaData.subject} - AQuiz`,
         description: `${metaData.question} | AQuiz`,
         keywords: ["quiz", "quizzes", "AI", "artificial intelligence", "machine learning"],
         url: `https://questionbank.anmoljain.tech/questions/${id}`,
@@ -50,22 +52,35 @@ export default async function Question({params}) {
     // console.log(question)
     const questionId = arr[0]
     const response = await getQuestion(questionId)
-    // console.log(response.question)
+    // console.log(response)
     if (response.error) {
         redirect('/questions')
     }
     const question = response.question
+    const relatedQuestions = response.relatedQuestions
+    // console.log(relatedQuestions)
 
-    if (arr.length !== 2) {
-        redirect(`/questions/${questionId}/${((question.question).replace(/\s/g, '-')).toLowerCase()}`)
+    if (arr.length !== 1) {
+        redirect(`/questions/${questionId}`)
     }
 
 
     return (
         <>
             <Tab/>
-            <div className="my-24">
-                <div className="container max-w-4xl px-10 py-6 mx-auto rounded-lg shadow-sm dark:bg-gray-50">
+            <div className="my-12   ">
+                {/*a div that links to questions page for see all questions */}
+
+
+                <div className="container max-w-4xl px-10 py-6  mx-auto my-12 rounded-lg shadow-sm dark:bg-gray-50">
+                    {/*<Link href={"/questions"} className="text-sm flex gap-2 text-blue-700 mb-8 hover:scale-105 duration-500  ">*/}
+                    {/*    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}*/}
+                    {/*         stroke="currentColor" className="w-4 h-4">*/}
+                    {/*        <path strokeLinecap="round" strokeLinejoin="round"*/}
+                    {/*              d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>*/}
+                    {/*    </svg>*/}
+                    {/*    <span className={"cursor-pointer"}>Back to Questions</span>*/}
+                    {/*</Link>*/}
                     <div className="flex items-center justify-between">
                     <span className="text-sm dark:text-gray-600"> <span
                         className="text-xs md:text-sm dark:text-gray-600">{new Date(question.createdAt).toLocaleDateString('en-US', {
@@ -100,11 +115,41 @@ export default async function Question({params}) {
                         </details>
                         <div>
                         <span rel="noopener noreferrer" className="flex items-center">
-                            {/*<img src="https://source.unsplash.com/50x50/?portrait" alt="avatar"*/}
-                            {/*     className="object-cover w-10 h-10 mx-4 rounded-full dark:bg-gray-500"/>*/}
-                            {/*<span className="cursor-pointer dark:text-gray-600">Like</span>*/}
+
+                         <Like id={question._id}/>
+
+
                         </span>
                         </div>
+                    </div>
+                </div>
+
+                <div
+                    className="relative mb-24 md:mb-0 container flex-col w-[98%] md:w-[90%] px-5 bg-slate-300  mx-auto rounded-lg shadow-sm [&::-webkit-scrollbar-thumb]:dark:bg-black/50 [&::-webkit-scrollbar-thumb]:w-0.5 [&::-webkit-scrollbar-thumb]:rounded-3xl  [&::-webkit-scrollbar]:h-1.5   mt-6 flex center gap-4 py-6 overflow-x-auto">
+                    <div className={"text-base md:text-2xl font-semibold text-gray-950"}>Related Questions</div>
+
+                    <div
+                        className="flex gap-4 py-6  [&::-webkit-scrollbar-thumb]:dark:bg-black/50 [&::-webkit-scrollbar-thumb]:w-0.5 [&::-webkit-scrollbar-thumb]:rounded-3xl  [&::-webkit-scrollbar]:h-1.5  overflow-x-auto">
+                        {relatedQuestions.map((q, index) => (
+                            <Link href={`/questions/${q._id}`}
+                                  key={index}
+                                  className="  bg-white  rounded-lg shadow-md">
+                                <div className=" flex flex-col text-nowrap p-4">
+
+                                    <div className="mt-2 text-sm dark:text-gray-600">{q.question}</div>
+                                    <div className="flex items-center justify-between mt-4">
+                                        <details>
+                                            <summary
+                                                className="py-2 outline-none cursor-pointer text-sm dark:text-violet-600  ">View
+                                                Answer
+                                            </summary>
+
+                                        </details>
+
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </div>

@@ -14,9 +14,14 @@ export async function handler(req, id) {
         })
         question.views = question.views + 1;
         await question.save();
+
+        const relatedQuestions = await QuestionModal.find({subject: question.subject}).select("_id question").limit(9);
+
+        // console.log(relatedQuestions)
         return Response.json({
             error: false,
-            question
+            question,
+            relatedQuestions: relatedQuestions.filter(q => q._id.toString() !== questionId)
         });
     } catch (e) {
         return Response.json({
