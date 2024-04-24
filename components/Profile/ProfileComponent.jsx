@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {signOut,signIn,useSession} from "next-auth/react";
+import {signIn, signOut, useSession} from "next-auth/react";
+
 function ProfileComponent() {
     const session = useSession()
     // console.log(session)
@@ -105,6 +106,7 @@ function ProfileComponent() {
                         <div>
                             <div
                                 className="bg-white relative shadow rounded-lg w-5/6 md:w-5/6 lg:w-4/6 xl:w-3/6 mx-auto">
+
                                 <div className="flex justify-center">
                                     <Image
                                         src={user.avatar || "https://avatars0.githubusercontent.com/u/35900628?v=4"}
@@ -116,6 +118,13 @@ function ProfileComponent() {
                                         className="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
                                     />
                                 </div>
+                                {/*<div className="flex justify-between w-full ml-12 ">*/}
+                                {/*    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer"*/}
+                                {/*         fill="none" viewBox="0 0 24 24" stroke="currentColor">*/}
+                                {/*        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}*/}
+                                {/*              d="M6 18L18 6M6 6l12 12"/>*/}
+                                {/*    </svg>*/}
+                                {/*</div>*/}
 
                                 <div className="mt-16">
                                     <h1 className="font-bold text-center text-3xl text-gray-900">{user.name}</h1>
@@ -136,17 +145,38 @@ function ProfileComponent() {
                                         <h3 className="font-medium text-gray-900 text-left px-6">Your Quizzes</h3>
                                         <div className="mt-5 w-full flex flex-col  overflow-hidden text-sm  ">
                                             {quizzes.map((quiz, index) => (
-                                                <Link href={`/quiz/${quiz._id}`} key={index}
-                                                      className="w-full border-t border-gray-100 text-gray-600  py-4 pl-6 pr-3 mr-5 flex  hover:bg-gray-100 transition duration-150">
+                                                <div key={index}
+                                                     className="w-full border-t border-gray-100 text-gray-600  py-4 pl-6 pr-3 mr-5 flex  hover:bg-gray-100 transition duration-150">
+                                                    {/* logout svg on the top right corner of the div */}
+
                                                     <Image src={user.avatar} width={24} height={24} alt=""
                                                            className="rounded-full h-6 shadow-md inline-block mr-2"/>
                                                     <div className="flex justify-between w-full">
                                                         {/*<span className="font-medium">{quiz.topic}</span> its first letter should be capital */}
-                                                        <span className="font-medium">{quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1)}</span>
+                                                        <Link href={`/quiz/${quiz._id}`}
+                                                              className="font-medium text-base">{quiz.topic.charAt(0).toUpperCase() + quiz.topic.slice(1)}</Link>
                                                         <span
                                                             className="text-gray-500 text-xs ">{timeAgo(quiz.createdAt)}</span>
+
+                                                        {/*    delete button with tailwind css */}
+                                                        <button onClick={() => {
+                                                            axios.delete(`/api/quiz/getquiz/${quiz._id}`)
+                                                                .then((res) => {
+                                                                    if (res.data.error) {
+                                                                        return alert(res.data.error)
+                                                                    }
+                                                                    const newQuizzes = quizzes.filter((q) => q._id !== quiz._id)
+                                                                    setQuizzes(newQuizzes)
+                                                                    localStorage.setItem("UserQuizzes", JSON.stringify(newQuizzes))
+                                                                })
+                                                        }}
+                                                                className="bg-red-500 hover:bg-red-700 text-white  py-2 px-4 rounded-full">Delete
+                                                        </button>
+
+
                                                     </div>
-                                                </Link>
+
+                                                </div>
                                             ))}
 
                                         </div>
