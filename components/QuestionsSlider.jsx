@@ -48,8 +48,8 @@ export default function QuestionsSlider(props) {
 //                     <div className="my-8 px-4">
 //                         {/* Show topic */}
 //                         <h1 className="text-2xl font-semibold text-center mb-4">{props.topic}</h1>
-//                         {/* Question numbering */}
-//                         <p className="text-lg">Question {currentQuestion + 1} of {ques.length}</p>
+//                         {/* Questions numbering */}
+//                         <p className="text-lg">Questions {currentQuestion + 1} of {ques.length}</p>
 //                         <h3 className="text-xl font-semibold mt-4">{ques[currentQuestion].question}</h3>
 //                         <ul className="mt-4">
 //                             {ques[currentQuestion].options.map((option, i) => (
@@ -85,7 +85,7 @@ export default function QuestionsSlider(props) {
 //                         <h3 className="text-xl font-semibold mt-4">Your Answers:</h3>
 //                         {ques.map((question, index) => (
 //                             <div key={index} className="mt-4">
-//                                 <p><strong>Question {index + 1}:</strong> {question.question}</p>
+//                                 <p><strong>Questions {index + 1}:</strong> {question.question}</p>
 //                                 <p><strong>Your Answer:</strong> <span
 //                                     className={userAnswers[index] === question.correct ? "text-green-300" : "text-red-500"}>{userAnswers[index]}</span>
 //                                 </p>

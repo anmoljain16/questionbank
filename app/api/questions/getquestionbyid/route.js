@@ -18,7 +18,7 @@ export async function handler(req, id) {
 
         // console.log(questions)
 
-        return Response.json({message: 'Question fetched successfully', error: false, questions});
+        return Response.json({message: 'Questions fetched successfully', error: false, questions});
     } catch (e) {
 
         return Response.json({message: e.message, error: true});

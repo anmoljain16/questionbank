@@ -1,5 +1,5 @@
 "use client"
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import QuizScore from "@/components/Quiz/QuizScore";
 import Tab from "@/components/header/tab";
 
@@ -66,7 +66,7 @@ export default function QuizPage(props) {
                         <h1 className="text-2xl font-semibold text-center mb-4 ">
                             <span className={"font-normal  w-fit "}>  {props.topic}</span>
                         </h1>
-                        {/* Question numbering */}
+                        {/* Questions numbering */}
                         <p className="text-lg">Question {currentQuestion + 1} of {ques.length}</p>
                         <h3 className="text-xl font-semibold mt-4 ">{ques[currentQuestion].question}</h3>
                         <ul className="mt-4">

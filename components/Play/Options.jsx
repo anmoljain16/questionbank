@@ -48,6 +48,7 @@ export default function Options({options, id, correct, explanation}) {
             </ul>
             {selectedOption !== null && (
                 <div className="mt-4">
+                    <h6 className="text-sm text-green-500  uppercase">{correct}</h6>
                     <span className="text-sm">{explanation}</span>
                 </div>
             )}

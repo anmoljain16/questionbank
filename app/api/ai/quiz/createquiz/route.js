@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import {NextResponse} from "next/server";
 import {getServerSession} from "next-auth";
 import {connect} from "@/dbConnection/dbConnect";
 import Question from "@/modals/QuestionModal";
@@ -10,7 +10,7 @@ export async function handler(req) {
     if(!data.questions){
         return NextResponse.json({
             data: null,
-            error: "Question Not Found. Please try again."
+            error: "Questions Not Found. Please try again."
         });
     }
     let userId=null;
@@ -96,7 +96,7 @@ export async function handler(req) {
     //
     //     await connect();
     //     Quiz = await Quizzes.create(quizData);
-    //     questions = await Question.insertMany(data.questions.map((question) => {
+    //     questions = await Questions.insertMany(data.questions.map((question) => {
     //         return {
     //             subject: data.subject,
     //             topic: data.topic,

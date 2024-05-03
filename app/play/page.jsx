@@ -1,5 +1,5 @@
 import Tab from "@/components/header/tab";
-import Question from "@/components/Play/Question";
+import Questions from "@/components/Play/Questions";
 
 export const metadata = {
     title: "Play | AQuiz",
@@ -18,7 +18,7 @@ export default function Play() {
     return(
         <>
             <Tab/>
-           <Question/>
+            <Questions/>
         </>
     )
 }

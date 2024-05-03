@@ -1,6 +1,6 @@
 // import { NextResponse } from "next/server";
 // import { connect } from "@/dbConnection/dbConnect";
-// import Question from "@/modals/QuestionModal";
+// import Questions from "@/modals/QuestionModal";
 // import Quiz from "@/modals/quizModal";
 // import { getQuestions } from "@/app/api/ai/quiz/createquiz/gemini";
 // import axios from "axios";
@@ -101,7 +101,7 @@ export { handler as GET };
 // import { NextResponse } from "next/server";
 // import fs from "fs/promises";
 // import { connect } from "@/dbConnection/dbConnect";
-// import Question from "@/modals/QuestionModal";
+// import Questions from "@/modals/QuestionModal";
 // import Quiz from "@/modals/quizModal";
 //
 // export async function handler() {
@@ -124,7 +124,7 @@ export { handler as GET };
 //                 // Process each question in the quiz
 //                 const processedQuestions = await Promise.all(questions.map(async (q) => {
 //                     // Insert question into database
-//                     const insertedQuestion = await Question.create({
+//                     const insertedQuestion = await Questions.create({
 //                         subject,
 //                         topic,
 //                         difficulty,

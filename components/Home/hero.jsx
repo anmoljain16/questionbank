@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
-import dashboard from "@/public/assects/images/image_489.png"
 import HomeStats from "@/components/Home/HomeStats";
+
 export default function Hero() {
     return (
         <section className="pt-24 bg-white">
@@ -64,29 +63,29 @@ export default function Hero() {
 
                 <HomeStats/>
                 {/*<QuizzesCarousal/>*/}
-                <div className="w-full mx-auto mt-20 text-center md:w-10/12">
-                    <div className="relative z-0 w-full mt-8">
-                        <div className="relative overflow-hidden shadow-2xl">
-                            <div
-                                className="flex items-center flex-none px-4 bg-green-400 rounded-b-none h-11 rounded-xl">
-                                <div className="flex space-x-1.5">
-                                    <div className="w-3 h-3 border-2 border-white rounded-full"></div>
-                                    <div className="w-3 h-3 border-2 border-white rounded-full"></div>
-                                    <div className="w-3 h-3 border-2 border-white rounded-full"></div>
-                                </div>
-                            </div>
+                {/*<div className="w-full mx-auto mt-20 text-center md:w-10/12">*/}
+                {/*    <div className="relative z-0 w-full mt-8">*/}
+                {/*        <div className="relative overflow-hidden shadow-2xl">*/}
+                {/*            <div*/}
+                {/*                className="flex items-center flex-none px-4 bg-green-400 rounded-b-none h-11 rounded-xl">*/}
+                {/*                <div className="flex space-x-1.5">*/}
+                {/*                    <div className="w-3 h-3 border-2 border-white rounded-full"></div>*/}
+                {/*                    <div className="w-3 h-3 border-2 border-white rounded-full"></div>*/}
+                {/*                    <div className="w-3 h-3 border-2 border-white rounded-full"></div>*/}
+                {/*                </div>*/}
+                {/*            </div>*/}
 
-                            <Image
-                                priority={true}
-                                src={dashboard}
-                                alt={"AQuiz Home Page"}
-                                width={"100%"}
-                                height={`100%`}
-                            />
+                {/*            <Image*/}
+                {/*                priority={false}*/}
+                {/*                src={dashboard}*/}
+                {/*                alt={"AQuiz Home Page"}*/}
+                {/*                width={"100"}*/}
+                {/*                height={`100`}*/}
+                {/*            />*/}
 
-                        </div>
-                    </div>
-                </div>
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         </section>
     );

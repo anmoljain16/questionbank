@@ -41,7 +41,7 @@ export async function handler(req, id) {
     if (userLiked) {
         await LikeModal.findByIdAndDelete(userLiked._id);
         return Response.json({
-            message: "Question unliked successfully",
+            message: "Questions unliked successfully",
             question,
             user: userData.token
         })
@@ -55,7 +55,7 @@ export async function handler(req, id) {
 
 
     return Response.json({
-        message: "Question liked successfully",
+        message: "Questions liked successfully",
         question,
         user: userData.token
     })
