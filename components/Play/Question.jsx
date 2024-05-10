@@ -12,7 +12,7 @@ export default function Question({questions}) {
             const questionElements = document.getElementsByClassName('question');
             Array.from(questionElements).forEach((questionElement, index) => {
                 const {top, bottom} = questionElement.getBoundingClientRect();
-                const isVisible = top >= window.innerHeight * 0.25 && bottom <= window.innerHeight - (window.innerHeight * 0.25);
+                const isVisible = top >= window.innerHeight * 0.25 && bottom <= window.innerHeight - (window.innerHeight * 0.40);
                 if (isVisible) {
                     setQuestionOnScreen(index);
                     return; // Exit the loop once a visible question is found
