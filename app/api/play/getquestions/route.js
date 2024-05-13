@@ -17,7 +17,7 @@ export async function handler(request) {
             const questions = await Question.find({
                 subject: "Computer graphics and visualization",
                 createdAt: {$gt: new Date("2024-05-10")}
-            }).sort({topic: -1});
+            }).sort({topic: 1});
 
 
             return Response.json({
