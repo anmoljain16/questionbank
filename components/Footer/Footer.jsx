@@ -3,9 +3,9 @@ import {Link} from "next-view-transitions";
 function Footer() {
     return (
         <section className="bg-white mt-32 ">
-            <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+            <div className=" max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
 
-                <div className="flex justify-center mt-8 space-x-6">
+                <div className="hidden flex justify-center mt-8 space-x-6">
                     <Link href="https://www.linkedin.com/in/anmol16/" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Linkedin</span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" aria-hidden="true"
