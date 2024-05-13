@@ -41,7 +41,7 @@ export default function Question({questions}) {
                         </span>
                         <span rel="noopener noreferrer"
                               className="px-2 py-1 text-xs md:text-sm rounded dark:bg-green-500 dark:text-gray-50">
-                            {question.subject}
+                            {question.topic}
                         </span>
                     </div>
                     <div className="mt-3">
