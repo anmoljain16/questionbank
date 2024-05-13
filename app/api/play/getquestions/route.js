@@ -8,11 +8,14 @@ export async function handler(request) {
         try{
             await connect();
 
-            const questions = await Question.aggregate([
-                {
-                    $sample: {size: 20}
-                }
-            ])
+            // const questions = await Question.aggregate([
+            //     {
+            //         $sample: {size: 20}
+            //     }
+            // ])
+
+            const questions = await Question.find({subject: "Computer graphics and visualization"})
+                .sort({createdAt: -1});
 
             return Response.json({
                 data: questions,
