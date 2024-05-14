@@ -30,7 +30,7 @@ export default async function Questions() {
 
     return (
         <main>
-            <div className=" mt-10">
+            <div className=" mt-10 bg-gray-100">
                 <div
                     className="container  my-4 cursor-default max-w-4xl w-[96%] md:px-10 px-3.5 py-6 mx-auto rounded-lg shadow-sm dark:bg-gray-800 sticky top-2 z-10">
                     {/*<span className="text-xs dark:text-gray-600 ">Life is Unfair</span>*/}

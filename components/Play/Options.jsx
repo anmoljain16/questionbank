@@ -31,9 +31,9 @@ export default function Options({options, id, correct, explanation}) {
                         className={`flex items-center text-sm cursor-pointer hover:bg-white/70 hover:text-gray-950 duration-200 justify-between p-2 mt-2 border rounded-lg ${
                             selectedOption === option
                                 ? isCorrect
-                                    ? "bg-green-100 text-green-700"
-                                    : "bg-red-100 text-red-700"
-                                : "bg-gray-100 text-gray-700"
+                                    ? "bg-green-100 text-green-700 hover:bg-green-100 hover:text-green-700"
+                                    : "bg-red-100 text-red-700 hover:bg-red-100 hover:text-red-700"
+                                : "bg-gray-100 text-gray-700 hover:text-gray-950"
                         }`}
                         onClick={() => handleOptionClick(option)}
                     >
