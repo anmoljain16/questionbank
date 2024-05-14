@@ -63,7 +63,7 @@ export default function Question({questions}) {
 
             {filteredQuestions.map((question, index) => (
                 <div key={index}
-                     className={`container my-4 ${questionOnScreen === index ? 'scale-105 bg-gray-100 border-2 shadow-2xl ' : ' shadow-sm  '} bg-gray-50 hover:scale-105 duration-300 hover:bg-gray-100 hover:border-2 hover:shadow-2xl cursor-default max-w-4xl w-[96%] md:px-10 px-3.5 py-6 mx-auto rounded-lg  `}>
+                     className={`container my-4 ${questionOnScreen === index ? 'scale-105 bg-gray-100 border-2 shadow-2xl ' : ' shadow-sm  '} bg-gray-50 cursor-pointer duration-300   max-w-4xl w-[96%] md:px-10 px-3.5 py-6 mx-auto rounded-lg  `}>
                     <div className="flex items-center justify-between">
                         <span className="text-sm dark:text-gray-600">
                             {new Date(question.createdAt).toLocaleDateString('en-US', {

@@ -28,7 +28,7 @@ export default function Options({options, id, correct, explanation}) {
                 {options.map((option, index) => (
                     <li
                         key={index}
-                        className={`flex items-center text-sm cursor-pointer justify-between p-2 mt-2 border rounded-lg ${
+                        className={`flex items-center text-sm cursor-pointer hover:bg-white/70 hover:text-gray-950 duration-200 justify-between p-2 mt-2 border rounded-lg ${
                             selectedOption === option
                                 ? isCorrect
                                     ? "bg-green-100 text-green-700"
